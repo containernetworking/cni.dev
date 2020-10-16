@@ -1,6 +1,6 @@
 title = "Hugo Netlify Starter"
 disableKinds = ["taxonomy", "taxonomyTerm"]
-copyright = "Cloud Native Computing Foundation"
+copyright = "Cloud Native Computing Foundation."
 
 enableGitInfo = true
 

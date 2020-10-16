@@ -1,7 +1,7 @@
 
 {{ range . }}
 {{ $color := .color | default "white" }}
-<a class="btn text-light" style="background-color: {{ .color }}">
+<a class="btn text-light" style="background-color: {{ .color }}" href="{{ .url }}">
     {{ with .icon }}
     <span class="icon">
       <i class="{{ . }}"></i>

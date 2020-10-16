@@ -7,23 +7,23 @@
 <nav class="section-nav">
       <p class="menu-label">Documentation:</p>
       <ul class="menu-list">
-        <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.Title | markdownify }}</a>
+        <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
         {{ range .RegularPages }}
           <ul>
             <li>
             <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">
-              {{ .Title | markdownify }}
+              {{ .LinkTitle | markdownify }}
             </a>
             </li>
           </ul>
         {{ end }}
         </li>
     {{ range .Sections }}
-        <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.Title | markdownify }}</a>
+        <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
           <ul>
             {{ range .CurrentSection.RegularPages }}
             <li>
-                <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.Title | markdownify }}</a>
+                <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
             </li>
             {{ end }}
           </ul>
