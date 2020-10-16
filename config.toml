@@ -13,6 +13,7 @@ description = "The Container Network Interface"
 favicon = "favicon.png"
 repositoryUrl = "https://github.com/containernetworking/cni.dev"
 contentDir = "/content/"
+cni_versions = ["0.8.0"]
 
 [params.logos]
 navbar = "cni-horizontal-color.png"
@@ -42,13 +43,3 @@ type = "heading_font"
 name = "Home"
 url = "/"
 weight = 1
-
-[[menu.main]]
-name = "Test Content"
-url = "/test-content/"
-weight = 2
-
-[[menu.main]]
-name = "Theme Documentation"
-url = "#"
-weight = 3

@@ -4,6 +4,8 @@
 {{ $logo   := site.Params.logos.navbar }}
 {{ $menu   := site.Menus.main }}
 {{ $social := site.Params.social }}
+{{ $versions := site.Params.cni_versions }}
+{{ $latest   := index $versions 0 }}
 
 <div class="navbar navbar-expand-lg navbar-light bg-light sticky-top" role="navigation" aria-label="main navigation">
   <div class="container">
@@ -33,6 +35,9 @@
             {{ .Name }}
           </a>
           {{ end }}
+
+          {{ partial "cni-version-dropdown.html" . }}
+
         </li>
         {{ end }}
       </ul>
