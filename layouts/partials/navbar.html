@@ -11,7 +11,7 @@
       <a class="navbar-item" href="{{ $home }}">
         {{ if $logo }}
         {{ $url := printf "img/logos/%s" $logo | relURL }}
-          <img src="{{ $url }}" width="200">
+          <img src="{{ $url }}" class="logo">
         {{ else }}
         {{ $title }}
         {{ end }}
