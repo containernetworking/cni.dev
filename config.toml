@@ -1,4 +1,4 @@
-title = "Hugo Netlify Starter"
+title = "CNI"
 disableKinds = ["taxonomy", "taxonomyTerm"]
 copyright = "Cloud Native Computing Foundation."
 
@@ -9,13 +9,13 @@ style = "paraiso-dark"
 
 [params]
 font_awesome_version = "5.12.0"
-description = "Boilerplate for building beautiful websites"
+description = "The Container Network Interface"
 favicon = "favicon.png"
-repositoryUrl = "https://github.com/cncf/hugo-netlify-starter"
+repositoryUrl = "https://github.com/containernetworking/cni.dev"
 contentDir = "/content/"
 
 [params.logos]
-navbar = "cncf-color.png"
+navbar = "cni-horizontal-color.png"
 
 [[params.social]]
 name = "Twitter"
