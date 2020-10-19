@@ -1,8 +1,8 @@
 ---
 title: "How to upgrade to CNI Specification v0.3.1"
-description: ""
+description: "spec-upgrades.md"
 date: 2020-06-10
-draft: true
+draft: false
 toc: true
 weight: 20
 ---
