@@ -1,8 +1,8 @@
 ---
 title: "GOVERNANCE"
-description: ""
+description: "GOVERNANCE.md"
 date: 2020-06-10
-draft: true
+draft: false
 toc: true
 weight: 20
 ---

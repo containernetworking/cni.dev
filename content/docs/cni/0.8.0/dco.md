@@ -1,9 +1,8 @@
 ---
 title: "DCO"
-linkTitle: ""
 description: ""
 date: 2020-06-10
-draft: true
+draft: false
 toc: true
 weight: 20
 ---

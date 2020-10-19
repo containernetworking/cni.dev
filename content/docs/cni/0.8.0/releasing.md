@@ -1,8 +1,8 @@
 ---
 title: "RELEASING"
-description: ""
+description: "RELEASING.md"
 date: 2020-06-10
-draft: true
+draft: false
 toc: true
 weight: 20
 ---
