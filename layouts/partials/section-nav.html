@@ -1,8 +1,14 @@
 {{ $allSections  := site.Sections }} <!-- "blog" and "docs" -->
 {{ $docsSections := where $allSections "Section" "docs"}} <!-- "getting-started" and "deployment" -->
-{{ $thisUrl      := .RelPermalink }} <!-- the URL of the current page -->
+{{ $docsVersion  := .version }}
+{{ $here         := .here }}
+{{ $thisUrl      := .context.RelPermalink }} <!-- the URL of the current page -->
+
+{{ $version := index (split .context.File.Path "/") 2 }}
+{{/*  {{ printf "%#v" .context.RelPermalink }}  */}}
 
 {{ range $docsSections }}
+{{ if eq $version $docsVersion }} <!-- display only the current docs versions -->
 {{ $isThisPage := eq .RelPermalink $thisUrl }}
 <nav class="section-nav">
       <p class="menu-label">Documentation:</p>
@@ -19,15 +25,30 @@
         {{ end }}
         </li>
     {{ range .Sections }}
-        <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
-          <ul>
-            {{ range .CurrentSection.RegularPages }}
-            <li>
-                <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
-            </li>
-            {{ end }}
-          </ul>
-        </li>
+    {{ range .Sections }}
+      <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
+        <ul>
+          {{ range .CurrentSection.RegularPages }}
+          <li>
+              <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
+          </li>
+          {{ end }}
+        </ul>
+      </li>
+    {{ range .Sections }}
+      <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
+        <ul>
+          {{ range .CurrentSection.RegularPages }}
+          <li>
+              <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
+          </li>
+          {{ end }}
+        </ul>
+      </li>
+
     {{ end }}
+    {{ end }}
+    {{ end }}
+{{ end }}
 {{ end }}
 </nav>

@@ -1,5 +1,5 @@
 ---
-title: "0.8.0"
+title: "CNI - the Container Network Interface"
 description: "README.md"
 date: 2020-06-10
 draft: false
@@ -14,8 +14,6 @@ weight: 20
 ![CNI Logo](logo.png)
 
 ---
-
-# CNI - the Container Network Interface
 
 ## What is CNI?
 

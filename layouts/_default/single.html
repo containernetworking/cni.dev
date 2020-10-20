@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ $version := index (split .File.Path "/") 2 }}
   <header>
     <div>
       {{ partial "single-header.html" . }}
@@ -12,7 +13,7 @@
           {{ partial "docs/content.html" . }}
         </section>
         <section class="col col-4">
-          {{ partial "section-nav.html" . }}
+          {{ partial "section-nav.html" (dict "context" . "here" .RelPermalink "version" $version) }}
           <hr />
           {{ partial "docs/docs-nav.html" . }}
         </section>
