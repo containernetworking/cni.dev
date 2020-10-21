@@ -33,9 +33,17 @@
             {{ .Name }}
           </a>
           {{ end }}
+          {{ end }}
         </li>
-        {{ end }}
+        <li class="navbar-item nav-link dropdown">
+          {{ partial "navbar-version-selector.html" . }}
+        </li>
       </ul>
+      {{/*  <ul class="navbar-nav mr-auto">
+        <li class="navbar-item nav-link dropdown">
+          {{ partial "navbar-version-selector.html" . }}
+        </li>
+      </ul>  */}}
       <ul class="navbar-nav float-right">
         {{ with $social }}
         <li class="navbar-item">
@@ -44,7 +52,5 @@
         {{ end }}
       </ul>
     </div>
-
-
   </div> 
 </div>

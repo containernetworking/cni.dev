@@ -1,6 +1,6 @@
 title = "CNI"
 disableKinds = ["taxonomy", "taxonomyTerm"]
-copyright = "Cloud Native Computing Foundation."
+copyright = "CNI & CNI Plugins Contributors."
 
 enableGitInfo = true
 
@@ -14,8 +14,30 @@ favicon = "favicon.png"
 repositoryUrl = "https://github.com/containernetworking/cni.dev"
 contentDir = "/content/"
 
+# Menu title if your navbar has a versions selector to access old versions of your site.
+# This menu appears only if you have at least one [params.versions] set.
+version_menu = "Versions"
+
+latest = "v0.8"
+
+fullversion = "v0.8.0"
+version = "v0.8"
+githubbranch = "main"
+docsbranch = "main"
+deprecated = false
+currentUrl = "https://cni.dev/docs/cni"
+# nextUrl = "https://kubernetes-io-vnext-staging.netlify.com/"
+
+
 [params.logos]
 navbar = "cni-horizontal-color.png"
+
+[[params.versions]]
+fullversion = "v0.8.0"
+version = "v0.8"
+githubbranch = "v0.8.0"
+docsbranch = "main"
+url = "https://cni.netlify.app/"
 
 [[params.social]]
 name = "Twitter"
@@ -42,13 +64,3 @@ type = "heading_font"
 name = "Home"
 url = "/"
 weight = 1
-
-[[menu.main]]
-name = "Test Content"
-url = "/test-content/"
-weight = 2
-
-[[menu.main]]
-name = "Theme Documentation"
-url = "#"
-weight = 3

@@ -1,6 +1,21 @@
 ---
-title: "Home"
+title: "0.8.0"
+description: "README.md"
+date: 2020-06-10
+draft: false
+toc: true
+weight: 20
 ---
+
+[![Linux Build Status](https://travis-ci.org/containernetworking/cni.svg?branch=master)](https://travis-ci.org/containernetworking/cni)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/wtrkou8oow7x533e/branch/master?svg=true)](https://ci.appveyor.com/project/cni-bot/cni/branch/master)
+[![Coverage Status](https://coveralls.io/repos/github/containernetworking/cni/badge.svg?branch=master)](https://coveralls.io/github/containernetworking/cni?branch=master)
+
+![CNI Logo](logo.png)
+
+---
+
+# CNI - the Container Network Interface
 
 ## What is CNI?
 
@@ -70,13 +85,13 @@ The CNI team also maintains some [core plugins in a separate repository](https:/
 ## Contributing to CNI
 
 We welcome contributions, including [bug reports](https://github.com/containernetworking/cni/issues), and code and documentation improvements.
-If you intend to contribute to code or documentation, please read [CONTRIBUTING.md](https://github.com/containernetworking/cni/blob/master/CONTRIBUTING.md). Also see the [contact section](#contact) in this README.
+If you intend to contribute to code or documentation, please read [CONTRIBUTING.md](CONTRIBUTING.md). Also see the [contact section](#contact) in this README.
 
 ## How do I use CNI?
 
 ### Requirements
 
-The CNI spec is language agnostic.  To use the Go language libraries in this repository, you'll need a recent version of Go.  You can find the Go versions covered by our [automated tests](https://travis-ci.org/containernetworking/cni/builds) in [.travis.yaml](https://github.com/containernetworking/cni/blob/master/.travis.yml).
+The CNI spec is language agnostic.  To use the Go language libraries in this repository, you'll need a recent version of Go.  You can find the Go versions covered by our [automated tests](https://travis-ci.org/containernetworking/cni/builds) in [.travis.yaml](.travis.yml).
 
 ### Reference Plugins
 
@@ -208,5 +223,3 @@ For any questions about CNI, please reach out via:
 - Email: [cni-dev](https://groups.google.com/forum/#!forum/cni-dev)
 - IRC: #[containernetworking](irc://irc.freenode.net:6667/#containernetworking) channel on [freenode.net](https://freenode.net/)
 - Slack: #cni on the [CNCF slack](https://slack.cncf.io/).  NOTE: the previous CNI Slack (containernetworking.slack.com) has been sunsetted.
-
-If you have a _security_ issue to report, please do so privately to the email addresses listed in the [MAINTAINERS](MAINTAINERS) file.

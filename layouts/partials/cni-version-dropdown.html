@@ -1,0 +1,29 @@
+<!-- Based on Luc Perkins Versioned Documentation from Longhorn.io -->
+<!-- https://github.com/longhorn/website/blob/master/layouts/partials/version-dropdown.html -->
+
+{{ $versions := site.Params.cni_versions }}
+{{ $latest   := index $versions 0 }}
+{{ $docsUrl  := printf "docs/cni/%s" $latest | relURL }}
+<nav class="navbar" role="navigation" aria-label="dropdown navigation">
+  <div class="navbar-item has-dropdown is-hoverable">
+    <a class="navbar-link is-arrowless" href="{{ $docsUrl }}">
+      <span class="has-text-weight-bold">
+        CNI Docs
+      </span>
+      <span class="icon has-text-secondary">
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </span>
+    </a>
+
+    <div class="navbar-dropdown">
+      {{ range $versions }}
+      {{ $link     := printf "docs/cni/%s" . | relURL }}
+      {{ $isLatest := eq . $latest }}
+      <a class="navbar-item" href="{{ $link }}">
+        {{ . }}{{ if $isLatest }} (<strong>latest</strong>){{ end }}
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</nav>
+
