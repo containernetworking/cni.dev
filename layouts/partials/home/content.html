@@ -1,3 +1,19 @@
+{{ $title := site.Title }}
+{{ $desc  := site.Params.description | markdownify }}
+
+<section class="container-xl">
+  <div class="row">
+    <div class="col-12">
+      <h1>
+        {{ $title }}
+      </h1>
+      <p class="lead">
+        {{ $desc }}
+      </p>
+    </div>
+  </div>
+</section>
+
 {{ with .Content }}
 <section class="container-xl">
   <div class="row">

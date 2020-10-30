@@ -1,6 +1,5 @@
 title = "CNI"
 disableKinds = ["taxonomy", "taxonomyTerm"]
-copyright = "Cloud Native Computing Foundation."
 
 enableGitInfo = true
 
@@ -8,6 +7,7 @@ enableGitInfo = true
 style = "paraiso-dark"
 
 [params]
+projectName = "CNI"
 font_awesome_version = "5.12.0"
 description = "The Container Network Interface"
 favicon = "favicon.png"
@@ -16,6 +16,12 @@ contentDir = "/content/"
 
 [params.logos]
 navbar = "cni-horizontal-color.png"
+
+[[params.social]]
+name = "GitHub"
+color = "#000000"
+url = "https://github.com/containernetworking"
+icon = "fab fa-github"
 
 [[params.social]]
 name = "Twitter"
@@ -44,11 +50,7 @@ url = "/"
 weight = 1
 
 [[menu.main]]
-name = "Test Content"
-url = "/test-content/"
+name = "Sample Content"
+url = "/docs/"
 weight = 2
 
-[[menu.main]]
-name = "Theme Documentation"
-url = "#"
-weight = 3
