@@ -5,7 +5,7 @@ end_of_line = lf
 insert_final_newline = true
 
 [*.md]
-insert_final_newline = false
+trim_trailing_whitespace = false
 
 [Makefile]
 indent_style = tab
@@ -13,3 +13,4 @@ indent_style = tab
 [*.{html,js,json,md,sass,yaml}]
 indent_style = space
 indent_size = 2
+
