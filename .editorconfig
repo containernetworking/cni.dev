@@ -4,6 +4,9 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
+[*.md]
+insert_final_newline = false
+
 [Makefile]
 indent_style = tab
 
