@@ -7,5 +7,7 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "hugo-extended": "^0.76.5"
+  }
 }

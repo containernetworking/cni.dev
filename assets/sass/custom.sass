@@ -101,3 +101,29 @@ nav
     padding-left: 0
     ul
       padding-left: 1.5rem
+
+
+.td-content, body
+  blockquote.callout
+    padding: 0.4rem 0.4rem 0.4rem 1rem
+    border: 1px solid #eee
+    border-left-width: 0.5em
+    background: #fff
+    color: #000
+    margin-top: 0.5em
+    margin-bottom: 0.5em
+
+  blockquote.callout
+    border-radius: calc(1em/3)
+
+  .callout.caution
+    border-left-color: #f0ad4e
+
+  .callout.note
+    border-left-color: #428bca
+
+  .callout.warning
+    border-left-color: #d9534f
+
+  h1:first-of-type + blockquote.callout
+    margin-top: 1.5em

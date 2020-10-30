@@ -44,11 +44,7 @@ url = "/"
 weight = 1
 
 [[menu.main]]
-name = "Test Content"
-url = "/test-content/"
+name = "Sample Content"
+url = "/docs/"
 weight = 2
 
-[[menu.main]]
-name = "Theme Documentation"
-url = "#"
-weight = 3

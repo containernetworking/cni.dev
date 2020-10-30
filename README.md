@@ -3,7 +3,7 @@
 This repository contains a boilerplate static site generator setup for creating CNCF documentation projects. We strongly recommend using this setup (it helps us help you and your project!), but none of the technologies in the stack are strictly required.
 
 The starter uses the following:
-* **[Hugo](https://gohugo.io/)** as a static site generator
+* **[Hugo (extended, v0.73 or above)](https://gohugo.io/)** as a static site generator
 * **[Bootstrap 4.5.x](https://getbootstrap.com/docs/4.5/getting-started/introduction/)** as a CSS framework
 * **[Netlify](https://www.netlify.com/)** for building, hosting, and DNS management
 
