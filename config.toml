@@ -18,6 +18,12 @@ contentDir = "/content/"
 navbar = "cni-horizontal-color.png"
 
 [[params.social]]
+name = "GitHub"
+color = "#000000"
+url = "https://github.com/containernetworking"
+icon = "fab fa-github"
+
+[[params.social]]
 name = "Twitter"
 color = "#00aced"
 url = "https://twitter.com/CloudNativeFdn"
