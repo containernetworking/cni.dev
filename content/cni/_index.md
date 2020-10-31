@@ -1,6 +1,9 @@
 ---
 title: "CNI"
 description: "The Container Network Interface"
+date: 2020-10-31
+draft: false
+toc: true
 ---
 
 ## Why develop CNI?
