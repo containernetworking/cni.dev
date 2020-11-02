@@ -54,3 +54,8 @@ name = "Sample Content"
 url = "/docs/"
 weight = 2
 
+[[menu.main]]
+name = "Plugins"
+url = "/plugins/"
+weight = 3
+
