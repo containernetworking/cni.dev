@@ -7,7 +7,7 @@ draft: false
 weight: 200
 ---
 
-<img src="http://i.imgur.com/hTeVwmJ.png" width="40" height="40" alt=":walrus:" class="emoji" title=":walrus:"/>&nbsp;[![Build Status](https://travis-ci.org/sirupsen/logrus.svg?branch=master)](https://travis-ci.org/sirupsen/logrus)&nbsp;[![GoDoc](https://godoc.org/github.com/sirupsen/logrus?status.svg)](https://godoc.org/github.com/sirupsen/logrus)
+<img src="https://i.imgur.com/hTeVwmJ.png" width="40" height="40" alt=":walrus:" class="emoji" title=":walrus:"/>&nbsp;[![Build Status](https://travis-ci.org/sirupsen/logrus.svg?branch=master)](https://travis-ci.org/sirupsen/logrus)&nbsp;[![GoDoc](https://godoc.org/github.com/sirupsen/logrus?status.svg)](https://godoc.org/github.com/sirupsen/logrus)
 
 Logrus is a structured logger for Go (golang), completely API compatible with
 the standard library logger.
@@ -32,7 +32,7 @@ username dot com`.
 Nicely color-coded in development (when a TTY is attached, otherwise just
 plain text):
 
-![Colored](http://i.imgur.com/PY7qMwd.png)
+![Colored](https://i.imgur.com/PY7qMwd.png)
 
 With `log.SetFormatter(&log.JSONFormatter{})`, for easy parsing by logstash
 or Splunk:
@@ -56,7 +56,7 @@ ocean","size":10,"time":"2014-03-10 19:57:38.562264131 -0400 EDT"}
 
 With the default `log.SetFormatter(&log.TextFormatter{})` when a TTY is not
 attached, the output is compatible with the
-[logfmt](http://godoc.org/github.com/kr/logfmt) format:
+[logfmt](https://godoc.org/github.com/kr/logfmt) format:
 
 ```text
 time="2015-03-26T01:27:38-04:00" level=debug msg="Started observing beach" animal=walrus number=8
@@ -338,7 +338,7 @@ The built-in logging formatters are:
 Third party logging formatters:
 
 * [`FluentdFormatter`](https://github.com/joonix/log). Formats entries that can be parsed by Kubernetes and Google Container Engine.
-* [`logstash`](https://github.com/bshuster-repo/logrus-logstash-hook). Logs fields as [Logstash](http://logstash.net) Events.
+* [`logstash`](https://github.com/bshuster-repo/logrus-logstash-hook). Logs fields as [Logstash](https://logstash.net) Events.
 * [`prefixed`](https://github.com/x-cray/logrus-prefixed-formatter). Displays log entry source along with alternative layout.
 * [`zalgo`](https://github.com/aybabtme/logzalgo). Invoking the P͉̫o̳̼̊w̖͈̰͎e̬͔̭͂r͚̼̹̲ ̫͓͉̳͈ō̠͕͖̚f̝͍̠ ͕̲̞͖͑Z̖̫̤̫ͪa͉̬͈̗l͖͎g̳̥o̰̥̅!̣͔̲̻͊̄ ̙̘̦̹̦.
 
@@ -467,4 +467,4 @@ Situation when locking is not needed includes:
 
   2) logger.Out is a os.File handler opened with `O_APPEND` flag, and every write is smaller than 4k. (This allow multi-thread/multi-process writing)
 
-     (Refer to http://www.notthewizard.com/2014/06/17/are-files-appends-really-atomic/)
+     (Refer to https://www.notthewizard.com/2014/06/17/are-files-appends-really-atomic/)
