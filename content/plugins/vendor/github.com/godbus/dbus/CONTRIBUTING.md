@@ -3,7 +3,7 @@
 ## Getting Started
 
 - Fork the repository on GitHub
-- Read the [README](README.markdown) for build and test instructions
+- Read the [README](#) for build and test instructions
 - Play with the project, submit bugs, submit patches!
 
 ## Contribution Flow

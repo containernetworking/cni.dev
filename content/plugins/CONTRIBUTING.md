@@ -1,6 +1,6 @@
 # How to Contribute
 
-CNI is [Apache 2.0 licensed](LICENSE) and accepts contributions via GitHub
+CNI is [Apache 2.0 licensed](https://github.com/containernetworking/plugins/blob/master/LICENSE) and accepts contributions via GitHub
 pull requests. This document outlines some of the conventions on development
 workflow, commit message formatting, contact points and other resources to make
 it easier to get your contribution accepted.
@@ -12,7 +12,7 @@ We gratefully welcome improvements to documentation as well as to code.
 By contributing to this project you agree to the Developer Certificate of
 Origin (DCO). This document was created by the Linux Kernel community and is a
 simple statement that you, as a contributor, have the legal right to make the
-contribution. See the [DCO](DCO) file for details.
+contribution. See the [DCO](https://github.com/containernetworking/plugins/blob/master/DCO) file for details.
 
 # Email and Chat
 
@@ -130,7 +130,7 @@ git tools.
 ## 3rd party plugins
 So you've built a CNI plugin.  Where should it live?
 
-Short answer: We'd be happy to link to it from our [list of 3rd party plugins](README.md#3rd-party-plugins).
+Short answer: We'd be happy to link to it from our [list of 3rd party plugins](#).
 But we'd rather you kept the code in your own repo.
 
 Long answer: An advantage of the CNI model is that independent plugins can be
