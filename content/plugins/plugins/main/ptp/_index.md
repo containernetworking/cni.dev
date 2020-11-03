@@ -1,4 +1,11 @@
-# ptp plugin
+---
+title: ptp plugin
+description: "plugins/main/ptp/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 The ptp plugin creates a point-to-point link between a container and the host by using a veth device.
@@ -8,7 +15,7 @@ The traffic of the container interface will be routed through the interface of t
 
 ## Example network configuration
 
-```
+```json
 {
 	"name": "mynet",
 	"type": "ptp",

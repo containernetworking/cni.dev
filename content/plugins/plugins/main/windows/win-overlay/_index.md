@@ -1,11 +1,18 @@
-# win-overlay plugin
+---
+title: win-overlay plugin
+description: "plugins/main/windows/win-overlay/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
 With win-overlay plugin, all containers (on the same host) are plugged into an Overlay network based on VXLAN encapsulation. 
 
 ## Example configuration
-```
+```json
 {
 	"name": "mynet",
 	"type": "win-overlay",

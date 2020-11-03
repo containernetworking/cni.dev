@@ -1,4 +1,11 @@
-# go-shellwords
+---
+title: go-shellwords
+description: "vendor/github.com/mattn/go-shellwords/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 [![Coverage Status](https://coveralls.io/repos/mattn/go-shellwords/badge.png?branch=master)](https://coveralls.io/r/mattn/go-shellwords?branch=master)
 [![Build Status](https://travis-ci.org/mattn/go-shellwords.svg?branch=master)](https://travis-ci.org/mattn/go-shellwords)

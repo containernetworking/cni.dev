@@ -1,4 +1,11 @@
-# host-device
+---
+title: host-device
+description: "plugins/main/host-device/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 Move an already-existing device into a container.
 

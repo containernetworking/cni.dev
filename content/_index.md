@@ -1,5 +1,6 @@
 ---
 title: "Home"
+date: 2020-11-02
 ---
 
 [This is a blatantly broken link](https://kubernetes.io/hl)

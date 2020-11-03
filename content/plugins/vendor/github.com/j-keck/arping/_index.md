@@ -1,5 +1,12 @@
-# arping
-  
+---
+title: arping
+description: "vendor/github.com/j-keck/arping/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
+
 arping is a native go library to ping a host per arp datagram, or query a host mac address 
 
 The currently supported platforms are: Linux and BSD.

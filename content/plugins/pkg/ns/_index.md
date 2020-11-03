@@ -1,4 +1,12 @@
-### Namespaces, Threads, and Go
+---
+title: Namespaces, Threads, and Go
+description: "pkg/ns/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
+
 On Linux each OS thread can have a different network namespace.  Go's thread scheduling model switches goroutines between OS threads based on OS thread load and whether the goroutine would block other goroutines.  This can result in a goroutine switching network namespaces without notice and lead to errors in your code.
 
 ### Namespace Switching

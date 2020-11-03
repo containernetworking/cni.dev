@@ -1,6 +1,14 @@
+---
+title: plugins
+description: "plugins/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
+
 [![Build Status](https://travis-ci.org/containernetworking/plugins.svg?branch=master)](https://travis-ci.org/containernetworking/plugins)
 
-# plugins
 Some CNI network plugins, maintained by the containernetworking team. For more information, see the individual READMEs.
 
 Read [CONTRIBUTING](CONTRIBUTING.md) for build and test instructions.

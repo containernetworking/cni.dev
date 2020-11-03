@@ -1,4 +1,11 @@
-# bandwidth plugin
+---
+title: bandwidth plugin
+description: "plugins/meta/bandwidth/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 

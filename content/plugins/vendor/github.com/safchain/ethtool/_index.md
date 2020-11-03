@@ -1,4 +1,11 @@
-# ethtool go package #
+---
+title: ethtool go package
+description: "vendor/github.com/safchain/ethtool/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 [![Build Status](https://travis-ci.org/safchain/ethtool.png?branch=master)](https://travis-ci.org/safchain/ethtool)
 [![GoDoc](https://godoc.org/github.com/safchain/ethtool?status.svg)](https://godoc.org/github.com/safchain/ethtool)

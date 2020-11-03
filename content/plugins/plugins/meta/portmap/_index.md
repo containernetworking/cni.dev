@@ -1,4 +1,11 @@
-## Port-mapping plugin
+---
+title: Port-mapping plugin
+description: "plugins/meta/portmap/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 This plugin will forward traffic from one or more ports on the host to the
 container. It expects to be run as a chained plugin.

@@ -1,11 +1,18 @@
-# win-bridge plugin
+---
+title: win-bridge plugin
+description: "plugins/main/windows/win-bridge/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
 With win-bridge plugin, all containers (on the same host) are plugged into an L2Bridge network that has one endpoint in the host namespace.
 
 ## Example configuration
-```
+```json
 {
 	"name": "mynet",
 	"type": "win-bridge",

@@ -1,3 +1,12 @@
+---
+title: ginkgo
+description: "vendor/github.com/onsi/ginkgo/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
+
 ![Ginkgo: A Golang BDD Testing Framework](http://onsi.github.io/ginkgo/images/ginkgo.png)
 
 [![Build Status](https://travis-ci.org/onsi/ginkgo.png)](https://travis-ci.org/onsi/ginkgo)

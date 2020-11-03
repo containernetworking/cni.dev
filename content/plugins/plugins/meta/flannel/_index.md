@@ -1,9 +1,16 @@
-# flannel plugin
+---
+title: flannel plugin
+description: "plugins/meta/flannel/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 This plugin is designed to work in conjunction with [flannel](https://github.com/coreos/flannel), a network fabric for containers.
 When flannel daemon is started, it outputs a `/run/flannel/subnet.env` file that looks like this:
-```
+```bash
 FLANNEL_NETWORK=10.1.0.0/16
 FLANNEL_SUBNET=10.1.17.1/24
 FLANNEL_MTU=1472
@@ -15,14 +22,14 @@ The flannel CNI plugin uses this information to configure another CNI plugin, su
 
 ## Operation
 Given the following network configuration file and the contents of `/run/flannel/subnet.env` above,
-```
+```json
 {
 	"name": "mynet",
 	"type": "flannel"
 }
 ```
 the flannel plugin will generate another network configuration file:
-```
+```json
 {
 	"name": "mynet",
 	"type": "bridge",
@@ -40,7 +47,7 @@ It will then invoke the bridge plugin, passing it the generated configuration.
 
 As can be seen from above, the flannel plugin, by default, will delegate to the bridge plugin.
 If additional configuration values need to be passed to the bridge plugin, it can be done so via the `delegate` field:
-```
+```json
 {
 	"name": "mynet",
 	"type": "flannel",
@@ -57,7 +64,7 @@ Notice that `mtu` has also been specified and this value will not be overwritten
 Additionally, the `delegate` field can be used to select a different kind of plugin altogether.
 To use `ipvlan` instead of `bridge`, the following configuration can be specified:
 
-```
+```json
 {
 	"name": "mynet",
 	"type": "flannel",
@@ -114,7 +121,7 @@ If IPMASQ is true, the Flannel CNI plugin will setup an OutBoundNAT policy and a
 All other delegate config e.g. other HNS endpoint policies in AdditionalArgs will be passed to WINCNI as-is.    
 
 Example VXLAN Flannel CNI config
-```
+```json
 {
 	"name": "mynet",
 	"type": "flannel",
@@ -126,7 +133,7 @@ Example VXLAN Flannel CNI config
 ```
 
 For this example, Flannel CNI would generate the following config to delegate to the windows CNI when FLANNEL_NETWORK=10.244.0.0/16, FLANNEL_SUBNET=10.244.1.0/24 and IPMASQ=true
-```
+```json
 {
 	"name": "mynet",
 	"type": "win-overlay",

@@ -1,4 +1,11 @@
-# netns - network namespaces in go #
+---
+title: netns - network namespaces in go
+description: "vendor/github.com/vishvananda/netns/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 The netns package provides an ultra-simple interface for handling
 network namespaces in go. Changing namespaces requires elevated

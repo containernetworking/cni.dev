@@ -1,4 +1,11 @@
-# bridge plugin
+---
+title: bridge plugin
+description: "plugins/main/bridge/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
@@ -12,7 +19,7 @@ The network configuration specifies the name of the bridge to be used.
 If the bridge is missing, the plugin will create one on first use and, if gateway mode is used, assign it an IP that was returned by IPAM plugin via the gateway field.
 
 ## Example configuration
-```
+```json
 {
     "cniVersion": "0.3.1",
     "name": "mynet",
@@ -30,7 +37,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ```
 
 ## Example L2-only configuration
-```
+```json
 {
     "cniVersion": "0.3.1",
     "name": "mynet",

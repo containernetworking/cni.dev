@@ -1,4 +1,11 @@
-# Building `sys/unix`
+---
+title: Building `sys/unix`
+description: "vendor/golang.org/x/sys/unix/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 The sys/unix package provides access to the raw system call interface of the
 underlying operating system. See: https://godoc.org/golang.org/x/sys/unix

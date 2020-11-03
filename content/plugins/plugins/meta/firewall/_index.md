@@ -1,8 +1,15 @@
-# firewall plugin
+---
+title: firewall plugin
+description: "plugins/meta/firewall/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
-This plugin creates firewall rules to allow traffic to/from container IP address via the host network .
+This plugin creates firewall rules to allow traffic to/from container IP address via the host network.
 It does not create any network interfaces and therefore does not set up connectivity by itself.
 It is intended to be used as a chained plugins.
 

@@ -1,4 +1,11 @@
-# netlink - netlink library for go #
+---
+title: netlink - netlink library for go
+description: "vendor/github.com/vishvananda/netlink/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 [![Build Status](https://travis-ci.org/vishvananda/netlink.png?branch=master)](https://travis-ci.org/vishvananda/netlink) [![GoDoc](https://godoc.org/github.com/vishvananda/netlink?status.svg)](https://godoc.org/github.com/vishvananda/netlink)
 

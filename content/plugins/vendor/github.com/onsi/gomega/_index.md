@@ -1,3 +1,12 @@
+---
+title: gomega
+description: "vendor/github.com/onsi/gomega/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
+
 ![Gomega: Ginkgo's Preferred Matcher Library](http://onsi.github.io/gomega/images/gomega.png)
 
 [![Build Status](https://travis-ci.org/onsi/gomega.png)](https://travis-ci.org/onsi/gomega)

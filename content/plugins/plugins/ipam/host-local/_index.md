@@ -1,4 +1,11 @@
-# host-local IP address management plugin
+---
+title: host-local IP address management plugin
+description: "plugins/ipam/host-local/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 host-local IPAM allocates IPv4 and IPv6 addresses out of a specified address range. Optionally,
 it can include a DNS configuration from a `resolv.conf` file on the host.

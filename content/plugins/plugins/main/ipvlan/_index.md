@@ -1,4 +1,11 @@
-# ipvlan plugin
+---
+title: ipvlan plugin
+description: "plugins/main/ipvlan/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
@@ -11,7 +18,7 @@ Because all ipvlan interfaces share the MAC address with the host interface, DHC
 
 ## Example configuration
 
-```
+```json
 {
 	"name": "mynet",
 	"type": "ipvlan",

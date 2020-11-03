@@ -1,7 +1,8 @@
 ---
 title: Docs smoke test page
 description: "Smoke test page, repurposed from https://github.com/kubernetes/website/blob/master/content/en/docs/test.md"
-main_menu: false
+toc: true
+draft: false
 ---
 
 This page serves two purposes:

@@ -1,4 +1,11 @@
-# macvlan plugin
+---
+title: macvlan plugin
+description: "plugins/main/macvlan/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
@@ -8,7 +15,7 @@ Since each macvlan interface has its own MAC address, it makes it easy to use wi
 
 ## Example configuration
 
-```
+```json
 {
 	"name": "mynet",
 	"type": "macvlan",

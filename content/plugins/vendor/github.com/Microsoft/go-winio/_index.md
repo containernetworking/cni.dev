@@ -1,4 +1,11 @@
-# go-winio
+---
+title: go-winio
+description: "vendor/github.com/Microsoft/go-winio/README.md"
+date: 2020-11-02
+toc: false
+draft: false
+weight: 200
+---
 
 This repository contains utilities for efficiently performing Win32 IO operations in
 Go. Currently, this is focused on accessing named pipes and other file handles, and

@@ -1,4 +1,11 @@
-# Source based routing plugin
+---
+title: Source based routing plugin
+description: "plugins/meta/sbr/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Introduction
 
@@ -112,7 +119,7 @@ This plugin must be used as a chained plugin. There are no specific configuratio
 A sample configuration for this plugin acting as a chained plugin after flannel
 is the following.
 
-~~~json
+```json
 {
   "name": "flannel-sbr",
   "cniVersion": "0.3.0",
@@ -124,4 +131,5 @@ is the following.
         }
     ]
 }
-~~~
+```
+

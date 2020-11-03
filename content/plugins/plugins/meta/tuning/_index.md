@@ -1,4 +1,11 @@
-# tuning plugin
+---
+title: tuning plugin
+description: "plugins/meta/tuning/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
@@ -8,7 +15,7 @@ It is only useful when used in addition to other plugins.
 
 ## System Controls Operation
 The following network configuration file
-```
+```json
 {
   "name": "mytuning",
   "type": "tuning",
@@ -21,7 +28,7 @@ will set /proc/sys/net/core/somaxconn to 500.
 Other sysctls can be modified as long as they belong to the network namespace (`/proc/sys/net/*`).
 
 A successful result would simply be:
-```
+```json
 { }
 ```
 
@@ -36,7 +43,7 @@ Some network sysctls are documented in the Linux sources:
 ## Interface Attribute Operation
 The parameters, "mac", "mtu" and "promisc", changes the interface attributes as followings:
 
-```
+```json
 {
   "name": "mytuning",
   "type": "tuning",

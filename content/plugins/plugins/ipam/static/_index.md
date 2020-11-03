@@ -1,4 +1,11 @@
-# static IP address management plugin
+---
+title: static IP address management plugin
+description: "plugins/ipam/static/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
@@ -7,7 +14,7 @@ static IPAM is very simple IPAM plugin that assigns IPv4 and IPv6 addresses stat
 
 ## Example configuration
 
-```
+```json
 {
 	"ipam": {
 		"type": "static",

@@ -1,4 +1,11 @@
-# FileMutex
+---
+title: FileMutex
+description: "vendor/github.com/alexflint/go-filemutex/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 FileMutex is similar to `sync.RWMutex`, but also synchronizes across processes.
 On Linux, OSX, and other POSIX systems it uses the flock system call. On windows

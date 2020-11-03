@@ -1,4 +1,11 @@
-# dhcp plugin
+---
+title: dhcp plugin
+description: "plugins/ipam/dhcp/README.md"
+date: 2020-11-02
+toc: true
+draft: false
+weight: 200
+---
 
 ## Overview
 
@@ -27,12 +34,13 @@ With the daemon running, containers using the dhcp plugin can be launched.
 
 ## Example configuration
 
-```
+```json
 {
 	"ipam": {
 		"type": "dhcp",
 	}
 }
+```
 
 ## Network configuration reference
 
