@@ -4,7 +4,7 @@ description: "GOVERNANCE.md"
 date: 2020-06-10
 draft: false
 toc: true
-weight: 20
+weight: 400
 ---
 
 # CNI Governance

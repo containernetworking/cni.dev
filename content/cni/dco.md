@@ -4,7 +4,7 @@ description: ""
 date: 2020-06-10
 draft: false
 toc: false
-weight: 20
+weight: 400
 ---
 
 Developer Certificate of Origin

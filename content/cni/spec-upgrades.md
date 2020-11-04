@@ -4,7 +4,7 @@ description: "spec-upgrades.md"
 date: 2020-06-10
 draft: false
 toc: true
-weight: 20
+weight: 400
 ---
 
 The 0.3.0 specification contained a small error. The Result structure's `ip` field should have been renamed to `ips` to be consistent with the IPAM result structure definition; this rename was missed when updating the Result to accommodate multiple IP addresses and interfaces. All first-party CNI plugins (bridge, host-local, etc) were updated to use `ips` (and thus be inconsistent with the 0.3.0 specification) and most other plugins have not been updated to the 0.3.0 specification yet, so few (if any) users should be impacted by this change.

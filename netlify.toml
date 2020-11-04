@@ -34,14 +34,6 @@ package = "netlify-plugin-checklinks"
   # skipPatterns is an array of strings you can match against failing reports
   skipPatterns = [
     "#containernetworking",
-    "spec/0.4.0",
-    "spec/0.3.1",
-    "spec/0.3.0",
-    "spec/0.2.0",
-    "spec/0.1.0",
-    "conventions/0.4.0",
-    "conventions/0.3.1",
-    "conventions/0.3.0",
   ]
 
   # You can mark some check as todo, which will execute the check, but allow failures.
