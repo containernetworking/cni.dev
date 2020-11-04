@@ -13,7 +13,7 @@ The 0.3.1 specification corrects the Result structure to use the `ips` field nam
 
 # How to upgrade to CNI Specification v0.3.0
 
-Version 0.3.0 of the [CNI Specification](/cni/spec/0.3.0/) provides rich information
+Version 0.3.0 of the [CNI Specification](https://github.com/containernetworking/cni/blob/spec-v0.3.0/SPEC.md) provides rich information
 about container network configuration, including details of network interfaces
 and support for multiple IP addresses.
 
