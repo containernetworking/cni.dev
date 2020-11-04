@@ -51,7 +51,7 @@ url = "/"
 weight = 1
 
 [[menu.main]]
-name = "CNI"
+name = "Documentation"
 url = "/cni/"
 weight = 2
 

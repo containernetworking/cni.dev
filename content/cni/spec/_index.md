@@ -1,5 +1,5 @@
 ---
-title: "SPEC"
+title: "Specification"
 ---
 
 {{< cni-spec-version-list >}}

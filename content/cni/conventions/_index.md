@@ -1,5 +1,5 @@
 ---
-title: "CONVENTIONS"
+title: "Conventions"
 ---
 
 {{< cni-conventions-version-list >}}
