@@ -1,0 +1,7 @@
+###############################################
+# set server-side redirects in this file      #
+# see https://www.netlify.com/docs/redirects/ #
+# test at https://play.netlify.com/redirects  #
+###############################################
+
+/cni/spec/0.1.0/ https://github.com/containernetworking/cni/blob/spec-v0.1.0/SPEC.md 301
