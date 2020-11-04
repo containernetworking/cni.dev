@@ -1,0 +1,69 @@
+{{ $allSections  := site.Sections }} <!-- "blog" and "docs" -->
+{{ $docsSections := where $allSections "Section" "plugins" }} <!-- "getting-started" and "deployment" -->
+{{ $thisUrl      := .RelPermalink }} <!-- the URL of the current page -->
+
+{{ range $docsSections }}
+{{ $isThisPage := eq .RelPermalink $thisUrl }}
+<nav class="section-nav">
+  <p class="menu-label">Plugins:</p>
+  <ul class="menu-list">
+    <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
+      {{ range .RegularPages }} <!-- /plugins/ -->
+      <ul>
+        <li>
+        <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">
+          {{ .LinkTitle | markdownify }}
+        </a>
+        </li>
+      </ul>
+    {{ end }}
+    </li>
+    {{ range .Sections }} <!-- /plugins/{pkg}{plugins}{vendor}/ -->
+    {{ range .Sections }} <!-- /plugins/{pkg}{plugins}{vendor}/{github.com}{golang.org}/ -->
+    <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
+      <ul>
+        {{ range .CurrentSection.RegularPages }}
+        <li>
+            <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </li>
+    {{ range .Sections }} <!-- /plugins/{pkg}{plugins}{vendor}/{github.com}{golang.org}/{Microsoft}{x} -->
+    <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
+      <ul>
+        {{ range .CurrentSection.RegularPages }}
+        <li>
+            <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </li>
+    {{ range .Sections }} <!-- /plugins/{pkg}{plugins}{vendor}/{github.com}{golang.org}/{Microsoft}{x}/{go-winio}{sys} -->
+      <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
+      <ul>
+        {{ range .CurrentSection.RegularPages }}
+        <li>
+            <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </li>
+    {{ range .Sections }} <!-- /plugins/{pkg}{plugins}{vendor}/{github.com}{golang.org}/{Microsoft}{x}/{go-winio}{sys}/{unix} -->
+    <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
+      <ul>
+        {{ range .CurrentSection.RegularPages }}
+        <li>
+            <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </li>
+    {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ end }}
+  </ul>
+{{ end }}
+</nav>
