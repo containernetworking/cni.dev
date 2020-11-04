@@ -4,4 +4,4 @@
 # test at https://play.netlify.com/redirects  #
 ###############################################
 
-/cni/spec/0.1.0/ https://github.com/containernetworking/cni/blob/spec-v0.1.0/SPEC.md 301
+/cni/spec/0.1.0/ https://github.com/containernetworking/cni/blob/spec-v0.1.0/SPEC.md 301!
