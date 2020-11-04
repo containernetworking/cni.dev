@@ -1,7 +1,8 @@
 yarn:
 	yarn
 
-serve: yarn
+serve:
+	yarn
 	hugo server \
 		--buildDrafts \
 		--buildFuture \
@@ -10,6 +11,9 @@ serve: yarn
 production-build:
 	hugo \
 		--minify
+
+non-production-build: ## Build the non-production site, which adds noindex headers to prevent indexing
+	hugo --enableGitInfo
 
 preview-build:
 	hugo \
