@@ -38,7 +38,7 @@ fullversion = "v0.8.6"
 version = "v0.8.6"
 githubbranch = "v0.8.6"
 docsbranch = "release-0.8.6"
-url = "https://v0-8-6.cni.netlify.app"
+url = "https://v0-8-6-cni.netlify.app"
 
 [params.logos]
 navbar = "cni-horizontal-color.png"
