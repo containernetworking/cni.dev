@@ -13,6 +13,7 @@
           {{ partial "docs/docs-nav.html" . }}
         </section>
         <section class="col col-8">
+          {{ partial "deprecation-warning.html" . }}
           <h1 class="title">{{ .Page.Title | markdownify }}</h1>
           <p class="subtitle">{{ .Page.Description | markdownify }}</p>
           {{ partial "docs/content.html" . }}
