@@ -3,28 +3,17 @@ title: "Home"
 date: 2020-11-02
 ---
 
-[This is a blatantly broken link](https://kubernetes.io/hl)
+CNI (_Container Network Interface_), a [Cloud Native Computing Foundation](https://cncf.io) project, consists of a specification and libraries for writing plugins to configure network interfaces in Linux containers, along with a number of supported plugins.
+CNI concerns itself only with network connectivity of containers and removing allocated resources when the container is deleted.
+Because of this focus, CNI has a wide range of support and the specification is simple to implement.
 
-This is *not* a full-fledged Hugo theme! It's just a convenient way to get started with a brand new site that's wired with:
+As well as the [specification](/cni/spec/), the [CNI repository](https://github.com/containernetworking/cni) contains the Go source code of a [library for integrating CNI into applications](https://github.com/containernetworking/cni/tree/master/libcni) and an [example command-line tool](/cni/cnitool/) for executing CNI plugins.  A [separate repository contains reference plugins](https://github.com/containernetworking/plugins) and a template for making new plugins.
 
-* A [Netlify](https://netlify.com) configuration for easy deployment, plus deploy previews
-* Some baseline [Hugo](https://gohugo.io) scaffolding
-* The [Bootstrap 4.5.x](https://getbootstrap.com/docs/4.5/getting-started/introduction/) CSS framework
-* An example Hugo configuration with:
-  * A main menu
-  * Specified sans-serif and monospace fonts
-  * Some extra colors
-  * A Twitter button
-  * Some copyright text for the footer
+The template code makes it straight-forward to create a CNI plugin for an existing container networking project.
+CNI also makes a good framework for creating a new container networking project from scratch.
 
-To get started, you need to have Hugo and [Yarn](https://yarnpkg.com) installed. Once those are installed:
+Here are the recordings of two sessions that the CNI maintainers hosted at KubeCon/CloudNativeCon 2019:
 
-```shell
-git clone https://github.com/cncf/hugo-netlify-starter && cd hugo-netlify-starter
+- [Introduction to CNI](https://youtu.be/YjjrQiJOyME)
+- [CNI deep dive](https://youtu.be/zChkx-AB5Xc)
 
-# Install npm assets (just Bulma for Sass/CSS)
-yarn
-
-# Run the server locally
-make serve
-```
