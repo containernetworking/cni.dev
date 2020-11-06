@@ -14,10 +14,10 @@ favicon = "favicon.png"
 repositoryUrl = "https://github.com/containernetworking/cni.dev"
 contentDir = "/content/"
 
-latest = "v0.8.7"
+latest = "v0.8.8"
 
-fullversion = "v0.8.7"
-version = "v0.8.7"
+fullversion = "v0.8.8"
+version = "v0.8.8"
 docsbranch = "master"
 deprecated = false
 
@@ -28,8 +28,8 @@ version_menu = "Versions"
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
-docsbranch = "master"
-url = "https://deploy-preview-26--cni.netlify.app"
+docsbranch = "release-0.8.7"
+url = "https://v0-8-7-cni.netlify.app"
 
 [[params.versions]]
 fullversion = "v0.8.6"
