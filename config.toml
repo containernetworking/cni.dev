@@ -18,7 +18,6 @@ latest = "v0.8.7"
 
 fullversion = "v0.8.7"
 version = "v0.8.7"
-githubbranch = "master"
 docsbranch = "master"
 deprecated = false
 
@@ -29,14 +28,12 @@ version_menu = "Versions"
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
-githubbranch = "v0.8.7"
 docsbranch = "master"
 url = "https://deploy-preview-26--cni.netlify.app"
 
 [[params.versions]]
 fullversion = "v0.8.6"
 version = "v0.8.6"
-githubbranch = "v0.8.6"
 docsbranch = "release-0.8.6"
 url = "https://v0-8-6-cni.netlify.app"
 
