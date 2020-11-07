@@ -1,7 +1,7 @@
 ---
 title: ipvlan plugin
 description: "plugins/main/ipvlan/README.md"
-date: 2020-11-02
+date: 2020-08-26
 toc: true
 draft: false
 weight: 200
@@ -18,7 +18,7 @@ Because all ipvlan interfaces share the MAC address with the host interface, DHC
 
 ## Example configuration
 
-```json
+```
 {
 	"name": "mynet",
 	"type": "ipvlan",
@@ -34,7 +34,7 @@ Because all ipvlan interfaces share the MAC address with the host interface, DHC
 
 * `name` (string, required): the name of the network.
 * `type` (string, required): "ipvlan".
-* `master` (string, optional): name of the host interface to enslave. Defaults to default route interface.
+* `master` (string, required unless chained): name of the host interface to enslave.
 * `mode` (string, optional): one of "l2", "l3", "l3s". Defaults to "l2".
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to the value chosen by the kernel.
 * `ipam` (dictionary, required unless chained): IPAM configuration to be used for this network.
