@@ -1,7 +1,7 @@
 ---
 title: plugins
 description: "plugins/README.md"
-date: 2020-11-02
+date: 2020-05-13
 toc: true
 draft: false
 weight: 200
@@ -40,11 +40,3 @@ Read [CONTRIBUTING](CONTRIBUTING.md) for build and test instructions.
 
 ### Sample
 The sample plugin provides an example for building your own plugin.
-
-## Contact
-
-For any questions about CNI, please reach out via:
-- Email: [cni-dev](https://groups.google.com/forum/#!forum/cni-dev)
-- Slack: #cni on the [CNCF slack](https://slack.cncf.io/).
-
-If you have a _security_ issue to report, please do so privately to the email addresses listed in the [OWNERS](OWNERS.md) file.

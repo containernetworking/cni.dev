@@ -1,7 +1,7 @@
 ---
 title: macvlan plugin
 description: "plugins/main/macvlan/README.md"
-date: 2020-11-02
+date: 2020-05-13
 toc: true
 draft: false
 weight: 200
@@ -15,7 +15,7 @@ Since each macvlan interface has its own MAC address, it makes it easy to use wi
 
 ## Example configuration
 
-```json
+```
 {
 	"name": "mynet",
 	"type": "macvlan",
@@ -37,5 +37,5 @@ Since each macvlan interface has its own MAC address, it makes it easy to use wi
 
 ## Notes
 
-* If you are testing on a laptop, please remember that most wireless cards do not support being enslaved by macvlan.
+* If are testing on a laptop, please remember that most wireless cards do not support being enslaved by macvlan.
 * A single master interface can not be enslaved by both `macvlan` and `ipvlan`.

@@ -1,7 +1,7 @@
 ---
 title: firewall plugin
 description: "plugins/meta/firewall/README.md"
-date: 2020-11-02
+date: 2020-05-13
 toc: true
 draft: false
 weight: 200
@@ -9,7 +9,7 @@ weight: 200
 
 ## Overview
 
-This plugin creates firewall rules to allow traffic to/from container IP address via the host network.
+This plugin creates firewall rules to allow traffic to/from container IP address via the host network .
 It does not create any network interfaces and therefore does not set up connectivity by itself.
 It is intended to be used as a chained plugins.
 
@@ -35,7 +35,7 @@ The following network configuration file
         }
       },
       {
-        "type": "firewall"
+        "type": "firewall",
       }
     ]
 }
@@ -79,7 +79,7 @@ look like:
       },
       {
         "type": "firewall",
-        "backend": "firewalld"
+	"backend": "firewalld"
       }
     ]
 }
@@ -118,7 +118,7 @@ look like:
       },
       {
         "type": "firewall",
-        "backend": "iptables"
+	"backend": "iptables"
       }
     ]
 }
@@ -136,21 +136,7 @@ when containers are created and from where rules will be removed when containers
 CNI-FORWARD will have a pair of rules added, one for each direction, using the IPAM assigned IP address
 of the container as shown:
 
-`CNI-FORWARD` chain:
-- `-s 10.88.0.2 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`
-- `-d 10.88.0.2 -j ACCEPT`
+`CNI_FORWARD` chain:
+- `-s 10.88.0.2 -m conntrack --ctstate RELATED,ESTABLISHED -j CNI-FORWARD`
+- `-d 10.88.0.2 -j CNI-FORWARD`
 
-The `CNI-FORWARD` chain first sends all traffic to `CNI-ADMIN` chain, which is intended as an user-controlled chain for custom rules that run prior to rules managed by the `firewall` plugin. The `firewall` plugin does not add, delete or modify rules in the `CNI-ADMIN` chain.
-
-`CNI-FORWARD` chain:
-- `-j CNI-ADMIN`
-
-The chain name `CNI-ADMIN` can be overridden by specifying `iptablesAdminChainName` in the plugin configuration
-
-```
-      {
-        "type": "firewall",
-	"backend": "iptables",
-	"iptablesAdminChainName": "SOME-OTHER-CHAIN-NAME",
-      }
-```

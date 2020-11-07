@@ -1,7 +1,7 @@
 ---
 title: netns - network namespaces in go
 description: "vendor/github.com/vishvananda/netns/README.md"
-date: 2020-11-02
+date: 2020-05-13
 toc: true
 draft: false
 weight: 200
@@ -44,6 +44,7 @@ func main() {
 
     // Create a new network namespace
     newns, _ := netns.New()
+    netns.Set(newns)
     defer newns.Close()
 
     // Do something with the network namespace
