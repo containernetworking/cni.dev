@@ -7,6 +7,7 @@ draft: false
 weight: 200
 ---
 
-Warning: This library is still being developed.  Function calls will change.
+Warning: This library is still being developed. Function calls will change.
 
-I've removed Server Functionality, for me this project supports the underlying DHCP format not the implementation.
+Server Functionality has been removed, as this project supports the underlying DHCP format not the implementation.
+
