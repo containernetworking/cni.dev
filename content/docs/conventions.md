@@ -4,7 +4,7 @@ weight: 200
 ---
 
 # Extension conventions                                                        
-There are three ways of passing information to plugins using the Container Network Interface (CNI), none of which require the [spec](/cni/spec/) to be updated. These are 
+There are three ways of passing information to plugins using the Container Network Interface (CNI), none of which require the [spec](/docs/spec/) to be updated. These are 
 - plugin specific fields in the JSON config
 - `args` field in the JSON config
 - `CNI_ARGS` environment variable 
