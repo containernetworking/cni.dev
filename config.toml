@@ -19,7 +19,7 @@ latest = "v0.8.8"
 fullversion = "v0.8.7"
 version = "v0.8.7"
 docsbranch = "relese-0.8.7"
-deprecated = true
+deprecated = false
 currentUrl = "https://deploy-preview-26--cni.netlify.app"
 
 # Menu title if your navbar has a versions selector to access old versions of your site.
