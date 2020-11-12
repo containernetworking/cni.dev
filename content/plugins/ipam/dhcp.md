@@ -37,7 +37,7 @@ With the daemon running, containers using the dhcp plugin can be launched.
 ```json
 {
 	"ipam": {
-		"type": "dhcp",
+		"type": "dhcp"
 	}
 }
 ```
@@ -45,3 +45,4 @@ With the daemon running, containers using the dhcp plugin can be launched.
 ## Network configuration reference
 
 * `type` (string, required): "dhcp"
+
