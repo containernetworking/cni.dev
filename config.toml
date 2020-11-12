@@ -65,12 +65,6 @@ color = "#000000"
 url = "https://github.com/containernetworking"
 icon = "fab fa-github"
 
-[[params.social]]
-name = "Twitter"
-color = "#00aced"
-url = "https://twitter.com/CloudNativeFdn"
-icon = "fab fa-twitter"
-
 [[params.fonts]]
 name = "Fira Sans"
 sizes = [300, 400, 600, 700]
@@ -93,7 +87,7 @@ weight = 1
 
 [[menu.main]]
 name = "Documentation"
-url = "/cni/"
+url = "/docs/"
 weight = 2
 
 [[menu.main]]
