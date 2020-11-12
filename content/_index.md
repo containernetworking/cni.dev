@@ -7,7 +7,7 @@ CNI (_Container Network Interface_), a [Cloud Native Computing Foundation](https
 CNI concerns itself only with network connectivity of containers and removing allocated resources when the container is deleted.
 Because of this focus, CNI has a wide range of support and the specification is simple to implement.
 
-As well as the [specification](/cni/spec/), the [CNI repository](https://github.com/containernetworking/cni) contains the Go source code of a [library for integrating CNI into applications](https://github.com/containernetworking/cni/tree/master/libcni) and an [example command-line tool](/cni/cnitool/) for executing CNI plugins.  A [separate repository contains reference plugins](https://github.com/containernetworking/plugins) and a template for making new plugins.
+As well as the [specification](/docs/spec/), the [CNI repository](https://github.com/containernetworking/cni) contains the Go source code of a [library for integrating CNI into applications](https://github.com/containernetworking/cni/tree/master/libcni) and an [example command-line tool](/docs/cnitool/) for executing CNI plugins.  A [separate repository contains reference plugins](https://github.com/containernetworking/plugins) and a template for making new plugins.
 
 The template code makes it straight-forward to create a CNI plugin for an existing container networking project.
 CNI also makes a good framework for creating a new container networking project from scratch.
