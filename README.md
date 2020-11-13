@@ -47,13 +47,13 @@ Both use default components and styling from the Bootstrap CSS framework. No men
 
 # Versioning the CNI website
 
-The current website version should always be one plus the [containernetworking/plugins](https://github.com/containernetworking/plugins) repo’s most recent version as the website is a continuously deployed and often updated version of the documentation. The main, current version of the site is always the most up to date version of the documentation.
+The current website version should always be in sync with the [containernetworking/plugins](https://github.com/containernetworking/plugins) repo’s master branch as this website is its continuously deployed documentation. The current version of the site should always the most up to date version of the documentation.
 
 ## Creating a new version
 
-To create a new version from the current main branch, the process is as follows.
+To create a new version from the main branch, the process is as follows.
 
-For this example, v0.8.7 is the current main branch version, and will be frozen into its own version. The new version for the site’s main branch will be v0.8.8, but will be listed as `Current`.
+For this example, v0.8.7 is "Current" in the main branch, and will be frozen into its own version. The new version for the site’s main branch will be v0.8.8, but will be listed as `Current`.
 
 ### Create new branch & update version
 
@@ -104,7 +104,7 @@ Commit and push new `release-0.8.7` branch upstream.
 
 Login at https://app.netlify.com
 Select `CNCF Projects` team. 
-- Note: If you don’t have access to this team, please contact __ __ at the CNCF to update team permissions.
+- Note: If you don’t have access to this team, please contact the CNCF to update team permissions.
 
 ![CNCF Projects](static/img/readme/netlify-1-cncf-projects.png)
 
@@ -143,8 +143,29 @@ Set site name: v0-8-7-cni
 
 The site is now deployed at https://v0-8-7-cni.netlify.app/, with correct entries in the “Versions” menu.
 
-### DNS updates
-TODO: update with instructions for DNS
+#### DNS updates
+
+Now the permanant URL for the version can be set up.
+
+From the `v0-8-7-cni` dashboard, click `Domain Settings`
+
+![Domains](static/img/readme/netlify-4-domains-1.png)
+
+Click `Add custom domain`
+
+![Domains](static/img/readme/netlify-4-domains-2.png)
+
+Enter `v0-8-7.cni.dev` and click `Verify`
+
+![Domains](static/img/readme/netlify-4-domains-3.png)
+
+Netlify may prompt: "cni.dev already has an owner. Is it you?"
+
+Click `Yes, add domain` to continue.
+
+![Domains](static/img/readme/netlify-4-domains-4.png)
+
+https://v0-8-7.cni.dev is now set as the primary domain for this version.
 
 ### Update main branch with new version
 
@@ -153,22 +174,26 @@ In the `config.toml` file, update the `latest`, `fullversion` and `version`. Upd
 Add a new section for latest version, update the previous version’s `url` and `docsbranch`
 
 ```toml
-latest = "v0.8.8"       # updated
-latestUrl = "https://v0-8-7.cni.dev"
+# Latest released version information
+latest = "v0.8.7"                     # updated
+latestUrl = "https://v0-8-7.cni.dev"  # updated
 
-fullversion = "v0.8.8"  # updated
-version = "v0.8.8"      # updated
+# Site information (i.e., the site currently being served)
+fullversion = "v0.8.8"                # updated
+version = "Current"
 docsbranch = "master"
 deprecated = false
 
-# Updated current version menu entry
+# Version menu entries
+
+## Current version menu entry
 [[params.versions]]
-fullversion = "v0.8.8"  # updated
-version = "v0.8.8"      # updated
+fullversion = "v0.8.8"                # updated
+version = "Current"
 docsbranch = "master"
 url = "https://www.cni.dev"
 
-# New version v0.8.7 menu entry
+## v0.8.7 (latest) version menu entry
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
@@ -178,7 +203,7 @@ url = "https://v0-8-7.cni.dev"
 
 ### Update any old version branches that are still supported
 
-In this case, we have v0.8.6 that we are still supporting, so we need to change the config in the release-0.8.6 branch. This way the current version is still reflected on the site, and there are links to all the supported versions in the dropdown menu.
+In this case, we have v0.8.6 that is still supported, so we need to change the config in the release-0.8.6 branch. This way the current version is still reflected on the site, and there are links to all the supported versions in the dropdown menu.
 
 ```toml
 # config.toml file in release-0.8.6 branch (partial)
