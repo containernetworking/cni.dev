@@ -14,35 +14,47 @@ favicon = "favicon.png"
 repositoryUrl = "https://github.com/containernetworking/cni.dev"
 contentDir = "/content/"
 
-latest = "v0.8.8"
+# Version Menu Parameters
 
+# Menu title if your navbar has a versions selector to access old versions of
+# your site. This menu appears only if you have at least one [params.versions]
+# entry set.
+version_menu = "Versions"
+
+# Latest released version information
+latest = "v0.8.7"
+latestUrl = "https://v0-8-7.cni.dev"
+
+# Site information (i.e., the site currently being served)
 fullversion = "v0.8.6"
 version = "v0.8.6"
 docsbranch = "release-0.8.6"
 deprecated = true
-currentUrl = "https://deploy-preview-26--cni.netlify.app"
 
-# Menu title if your navbar has a versions selector to access old versions of your site.
-# This menu appears only if you have at least one [params.versions] set.
-version_menu = "Versions"
+# Version menu entries
 
+## Current version menu entry
 [[params.versions]]
 fullversion = "v0.8.8"
-version = "v0.8.8"
+version = "Current"
 docsbranch = "master"
-url = "https://deploy-preview-26--cni.netlify.app"
+url = "https://www.cni.dev"
 
+## v0.8.7 (latest) version menu entry
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
 docsbranch = "release-0.8.7"
-url = "https://v0-8-7-cni.netlify.app"
+url = "https://v0-8-7.cni.dev"
 
+## v0.8.6 version menu entry
 [[params.versions]]
 fullversion = "v0.8.6"
 version = "v0.8.6"
 docsbranch = "release-0.8.6"
-url = "https://v0-8-6-cni.netlify.app"
+url = "https://v0-8-6.cni.dev"
+
+# End of Version Menu paramaters
 
 [params.logos]
 navbar = "cni-horizontal-color.png"
