@@ -21,13 +21,13 @@ contentDir = "/content/"
 # entry set.
 version_menu = "Versions"
 
-# Current version information
-latest = "v0.8.8"
-currentUrl = "https://deploy-preview-26--cni.netlify.app"
+# Latest released version information
+latest = "v0.8.7"
+latestUrl = "https://v0-8-7.cni.dev"
 
-# Current site information (i.e., the current site being served)
-fullversion = "v0.8.8"
-version = "v0.8.8"
+# Site information (i.e., the site currently being served)
+fullversion = "v0.8.8" # will be v0.8.8 when frozen, currently un-versioned
+version = "Current"
 docsbranch = "master"
 deprecated = false
 
@@ -36,23 +36,23 @@ deprecated = false
 ## Current version menu entry
 [[params.versions]]
 fullversion = "v0.8.8"
-version = "v0.8.8"
+version = "Current"
 docsbranch = "master"
-url = "https://deploy-preview-26--cni.netlify.app"
+url = "https://www.cni.dev"
 
-## v0.8.7 version menu entry
+## v0.8.7 (latest) version menu entry
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
 docsbranch = "release-0.8.7"
-url = "https://v0-8-7-cni.netlify.app"
+url = "https://v0-8-7.cni.dev"
 
 ## v0.8.6 version menu entry
 [[params.versions]]
 fullversion = "v0.8.6"
 version = "v0.8.6"
 docsbranch = "release-0.8.6"
-url = "https://v0-8-6-cni.netlify.app"
+url = "https://v0-8-6.cni.dev"
 
 # End of Version Menu paramaters
 
