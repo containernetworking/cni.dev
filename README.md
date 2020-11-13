@@ -53,7 +53,7 @@ The current website version should always be one plus the [containernetworking/p
 
 To create a new version from the current main branch, the process is as follows.
 
-For this example, v0.8.7 is the current main branch version, and will be frozen into its own version. The new version for the site’s main branch will be v0.8.8.
+For this example, v0.8.7 is the current main branch version, and will be frozen into its own version. The new version for the site’s main branch will be v0.8.8, but will be listed as `Current`.
 
 ### Create new branch & update version
 
@@ -74,10 +74,10 @@ Add a new `[[params.versions]]` with the newest current version.
 Update the existing v0.8.7 `[[params.versions]]` for this version.
 
 ```toml
-latest = "v0.8.8"       # updated
-currentUrl = "https://deploy-preview-26--cni.netlify.app"
+latest = "v0.8.7" # updated
+latestUrl = "https://v0-8-7.cni.dev" # Updated
 
-# Current site information (i.e., the current site being served. In this case, v0.8.7)
+# Site information (i.e., the site currently being served. In this case, v0.8.7)
 fullversion = "v0.8.7"
 version = "v0.8.7"
 docsbranch = "relese-0.8.7" # updated
@@ -85,17 +85,17 @@ deprecated = false
 
 # Updated current version menu entry
 [[params.versions]]
-fullversion = "v0.8.8"  # updated
-version = "v0.8.8"      # updated
+fullversion = "v0.8.8" # updated
+version = "Current"
 docsbranch = "master"
-url = "https://deploy-preview-26--cni.netlify.app"
+url = "https://www.cni.dev"
 
 # New version v0.8.7 menu entry
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
 docsbranch = "release-0.8.7"
-url = "https://v0-8-7-cni.netlify.app"
+url = "https://v0-8-7.cni.dev"
 ```
 
 Commit and push new `release-0.8.7` branch upstream.
@@ -143,6 +143,9 @@ Set site name: v0-8-7-cni
 
 The site is now deployed at https://v0-8-7-cni.netlify.app/, with correct entries in the “Versions” menu.
 
+### DNS updates
+TODO: update with instructions for DNS
+
 ### Update main branch with new version
 
 In the `config.toml` file, update the `latest`, `fullversion` and `version`. Update the previous version’s prams.versions’ section `docsbranch` and `url`.
@@ -151,7 +154,7 @@ Add a new section for latest version, update the previous version’s `url` and 
 
 ```toml
 latest = "v0.8.8"       # updated
-currentUrl = "https://deploy-preview-26--cni.netlify.app"
+latestUrl = "https://v0-8-7.cni.dev"
 
 fullversion = "v0.8.8"  # updated
 version = "v0.8.8"      # updated
@@ -163,14 +166,14 @@ deprecated = false
 fullversion = "v0.8.8"  # updated
 version = "v0.8.8"      # updated
 docsbranch = "master"
-url = "https://deploy-preview-26--cni.netlify.app"
+url = "https://www.cni.dev"
 
 # New version v0.8.7 menu entry
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
 docsbranch = "release-0.8.7"
-url = "https://v0-8-7-cni.netlify.app"
+url = "https://v0-8-7.cni.dev"
 ```
 
 ### Update any old version branches that are still supported
@@ -180,8 +183,8 @@ In this case, we have v0.8.6 that we are still supporting, so we need to change 
 ```toml
 # config.toml file in release-0.8.6 branch (partial)
 
-latest = "v0.8.8"       # updated
-currentUrl = "https://deploy-preview-26--cni.netlify.app"
+latest = "v0.8.7"       # updated
+latestUrl = "https://v0-8-7.cni.dev"
 
 fullversion = "v0.8.6"
 version = "v0.8.6"
@@ -193,19 +196,19 @@ deprecated = true
 fullversion = "v0.8.8"  # updated
 version = "v0.8.8"      # updated
 docsbranch = "master"
-url = "https://deploy-preview-26--cni.netlify.app"
+url = "https://www.cni.dev"
 
 # New version v0.8.7 menu entry
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
 docsbranch = "release-0.8.7"
-url = "https://v0-8-7-cni.netlify.app"
+url = "https://v0-8-7.cni.dev"
 
 # Existing version v0.8.6 menu entry
 [[params.versions]]
 fullversion = "v0.8.6"
 version = "v0.8.6"
 docsbranch = "release-0.8.6"
-url = "https://v0-8-6-cni.netlify.app"
+url = "https://v0-8-6.cni.dev"
 ```
