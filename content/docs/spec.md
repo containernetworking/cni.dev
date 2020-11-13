@@ -27,4 +27,3 @@ Released versions of the spec are available as Git tags.
 {{< warning >}}
 Do not rely on these tags being stable.  In the future, we may change our mind about which particular commit is the right marker for a given historical spec version.
 {{< /warning >}}
-

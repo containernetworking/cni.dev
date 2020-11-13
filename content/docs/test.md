@@ -319,8 +319,10 @@ You can have multiple paragraphs and block-level elements inside an admonition.
 The reader should proceed with caution.
 {{< /caution >}}
 
-
 {{< warning >}}
 Warnings point out something that could cause harm if ignored.
 {{< /warning >}}
 
+{{< deprecationfilewarning >}}
+Deprecation warnings indicate that this file is not the latest version.
+{{< /deprecationfilewarning >}}
