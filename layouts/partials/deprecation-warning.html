@@ -7,7 +7,7 @@
       You are viewing documentation for CNI version: {{ .Param "version" }}
     </h3>
     <p> CNI {{ .Param "version" }} documentation is no longer actively maintained. The version you are currently viewing is a static snapshot. For up-to-date documentation, see the latest release,
-    <a href="{{ site.Params.latestUrl }}">{{ .Site.Params.latest }}</a>, or the <a href="https://www.cni.dev">current documentation</a>.
+    <a href="{{ site.Params.latestUrl }}{{ .RelPermalink }}">{{ .Site.Params.latest }}</a>, or the <a href="https://www.cni.dev{{ .RelPermalink }}">current documentation</a>.
     </p>
   </div>
 </section>
