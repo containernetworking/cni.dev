@@ -1,8 +1,8 @@
-# CNCF Hugo Starter
+# cni.dev
 
-This repository contains a boilerplate static site generator setup for creating CNCF documentation projects. We strongly recommend using this setup (it helps us help you and your project!), but none of the technologies in the stack are strictly required.
+The cni.dev website is generated from the [CNCF projects documentation boilerplate](https://github.com/cncf/hugo-netlify-starter).
 
-The starter uses the following:
+This site uses the following:
 * **[Hugo (extended, v0.73 or above)](https://gohugo.io/)** as a static site generator
 * **[Bootstrap 4.5.x](https://getbootstrap.com/docs/4.5/getting-started/introduction/)** as a CSS framework
 * **[Netlify](https://www.netlify.com/)** for building, hosting, and DNS management
@@ -47,7 +47,7 @@ Both use default components and styling from the Bootstrap CSS framework. No men
 
 # Versioning the CNI website
 
-The current website version should always be in sync with the [containernetworking/plugins](https://github.com/containernetworking/plugins) repo’s master branch as this website is its continuously deployed documentation. The current version of the site should always the most up to date version of the documentation.
+The current website version should always be in sync with the [containernetworking/plugins](https://github.com/containernetworking/plugins) repo’s master branch as this website is its continuously deployed documentation. The current version of the site should always be the most up to date version of the documentation.
 
 ## Creating a new version
 
@@ -98,7 +98,7 @@ docsbranch = "release-0.8.7"
 url = "https://v0-8-7.cni.dev"
 ```
 
-Commit and push new `release-0.8.7` branch upstream.
+Commit and push the new `release-0.8.7` branch upstream.
 
 ### Create new netlify site
 
@@ -145,7 +145,7 @@ The site is now deployed at https://v0-8-7-cni.netlify.app/, with correct entrie
 
 #### DNS updates
 
-Now the permanant URL for the version can be set up.
+Now the permanent URL for the version can be set up.
 
 From the `v0-8-7-cni` dashboard, click `Domain Settings`
 

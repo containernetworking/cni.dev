@@ -14,6 +14,7 @@ We believe that many container runtimes and orchestrators will seek to solve the
 To avoid duplication, we think it is prudent to define a common interface between the network plugins and container execution: hence we put forward this specification, along with libraries for Go and a set of plugins.
 
 ## Who is using CNI?
+
 ### Container runtimes
 - [rkt - container engine](https://coreos.com/blog/rkt-cni-networking.html)
 - [Kubernetes - a system to simplify container operations](https://kubernetes.io/docs/admin/network-plugins/)
@@ -54,11 +55,10 @@ To avoid duplication, we think it is prudent to define a common interface betwee
 
 The CNI team also maintains some [core plugins in a separate repository](https://github.com/containernetworking/plugins).
 
-
 ## Contributing to CNI
 
-We welcome contributions, including [bug reports](https://github.com/containernetworking/cni/issues), and code and documentation improvements.
-If you intend to contribute to code or documentation, please read [CONTRIBUTING.md](/docs/contributing/). Also see the [contact section](#contact) in this README.
+We welcome contributions, including [bug reports](https://github.com/containernetworking/cni/issues), code, and documentation improvements.
+If you intend to contribute to code or documentation, please read the [CONTRIBUTING](/docs/contributing/) page and see the [contact section](#contact) of this page.
 
 ## How do I use CNI?
 
@@ -69,7 +69,6 @@ The CNI spec is language agnostic.  To use the Go language libraries in this rep
 ### Reference Plugins
 
 The CNI project maintains a set of [reference plugins](https://github.com/containernetworking/plugins) that implement the CNI specification.
-NOTE: the reference plugins used to live in this repository but have been split out into a [separate repository](https://github.com/containernetworking/plugins) as of May 2017.
 
 ### Running the plugins
 
@@ -183,7 +182,7 @@ If these topics are of interest, please contact the team via the mailing list or
 
 ## Where are the binaries?
 
-The plugins moved to a separate repo:
+The plugins have been moved to a separate repo:
 https://github.com/containernetworking/plugins, and the releases there
 include binaries and checksums.
 

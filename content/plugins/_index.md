@@ -9,7 +9,7 @@ weight: 200
 
 [![Build Status](https://travis-ci.org/containernetworking/plugins.svg?branch=master)](https://travis-ci.org/containernetworking/plugins)
 
-Some CNI network plugins, maintained by the containernetworking team. For more information, see the individual READMEs.
+This is a list of CNI network plugins maintained by the containernetworking team. For more information, see the individual READMEs.
 
 Read [CONTRIBUTING](CONTRIBUTING.md) for build and test instructions.
 
@@ -31,7 +31,7 @@ Read [CONTRIBUTING](CONTRIBUTING.md) for build and test instructions.
 ### IPAM: IP address allocation
 * [`dhcp`](ipam/dhcp): Runs a daemon on the host to make DHCP requests on behalf of the container
 * [`host-local`](ipam/host-local): Maintains a local database of allocated IPs
-* [`static`](ipam/static):  Allocate a static IPv4/IPv6 addresses to container and it's useful in debugging purpose.
+* [`static`](ipam/static): Allocates static IPv4/IPv6 addresses to containers.
 
 ### Meta: other plugins
 
