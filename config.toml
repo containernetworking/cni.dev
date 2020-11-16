@@ -26,9 +26,9 @@ latest = "v0.8.7"
 latestUrl = "https://v0-8-7.cni.dev"
 
 # Site information (i.e., the site currently being served)
-fullversion = "v0.8.6"
-version = "v0.8.6"
-docsbranch = "release-0.8.6"
+fullversion = "v0.7.6"
+version = "v0.7.6"
+docsbranch = "release-0.7.6"
 deprecated = true
 
 # Version menu entries
@@ -53,6 +53,20 @@ fullversion = "v0.8.6"
 version = "v0.8.6"
 docsbranch = "release-0.8.6"
 url = "https://v0-8-6.cni.dev"
+
+## v0.7.6 version menu entry
+[[params.versions]]
+fullversion = "v0.7.6"
+version = "v0.7.6"
+docsbranch = "release-0.7.6"
+url = "https://v0-7-6.cni.dev"
+
+## v0.6.0 version menu entry
+[[params.versions]]
+fullversion = "v0.6.0"
+version = "v0.6.0"
+docsbranch = "release-0.6.0"
+url = "https://v0-6-0.cni.dev"
 
 # End of Version Menu paramaters
 
