@@ -1,7 +1,7 @@
 ---
 title: bridge plugin
 description: "plugins/main/bridge/README.md"
-date: 2020-11-02
+date: 2019-08-13
 toc: true
 draft: false
 weight: 200
@@ -19,31 +19,20 @@ The network configuration specifies the name of the bridge to be used.
 If the bridge is missing, the plugin will create one on first use and, if gateway mode is used, assign it an IP that was returned by IPAM plugin via the gateway field.
 
 ## Example configuration
-```json
-{
-    "cniVersion": "0.3.1",
-    "name": "mynet",
-    "type": "bridge",
-    "bridge": "mynet0",
-    "isDefaultGateway": true,
-    "forceAddress": false,
-    "ipMasq": true,
-    "hairpinMode": true,
-    "ipam": {
-        "type": "host-local",
-        "subnet": "10.10.0.0/16"
-    }
-}
-```
 
-## Example L2-only configuration
-```json
+```
 {
-    "cniVersion": "0.3.1",
-    "name": "mynet",
-    "type": "bridge",
-    "bridge": "mynet0",
-    "ipam": {}
+	"name": "mynet",
+	"type": "bridge",
+	"bridge": "mynet0",
+	"isDefaultGateway": true,
+	"forceAddress": false,
+	"ipMasq": true,
+	"hairpinMode": true,
+	"ipam": {
+		"type": "host-local",
+		"subnet": "10.10.0.0/16"
+	}
 }
 ```
 
@@ -58,10 +47,6 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `ipMasq` (boolean, optional): set up IP Masquerade on the host for traffic originating from this network and destined outside of it. Defaults to false.
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to the value chosen by the kernel.
 * `hairpinMode` (boolean, optional): set hairpin mode for interfaces on the bridge. Defaults to false.
-* `ipam` (dictionary, required): IPAM configuration to be used for this network. For L2-only network, create empty dictionary.
+* `ipam` (dictionary, required): IPAM configuration to be used for this network.
 * `promiscMode` (boolean, optional): set promiscuous mode on the bridge. Defaults to false.
-* `vlan` (int, optional): assign VLAN tag. Defaults to none.
 
-*Note:* The VLAN parameter configures the VLAN tag on the host end of the veth and also enables the vlan_filtering feature on the bridge interface.
-
-*Note:* To configure uplink for L2 network you need to allow the vlan on the uplink interface by using the following command ``` bridge vlan add vid VLAN_ID dev DEV```.

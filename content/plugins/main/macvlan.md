@@ -1,7 +1,7 @@
 ---
 title: macvlan plugin
 description: "plugins/main/macvlan/README.md"
-date: 2020-05-13
+date: 2019-08-13
 toc: true
 draft: false
 weight: 200
@@ -30,12 +30,13 @@ Since each macvlan interface has its own MAC address, it makes it easy to use wi
 
 * `name` (string, required): the name of the network
 * `type` (string, required): "macvlan"
-* `master` (string, optional): name of the host interface to enslave. Defaults to default route interface.
-* `mode` (string, optional): one of "bridge", "private", "vepa", "passthru". Defaults to "bridge".
-* `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to the value chosen by the kernel. The value must be \[0, master's MTU\].
-* `ipam` (dictionary, required): IPAM configuration to be used for this network. For interface only without ip address, create empty dictionary.
+* `master` (string, required): name of the host interface to enslave
+* `mode` (string, optional): one of "bridge", "private", "vepa", "passthrough". Defaults to "bridge".
+* `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to the value chosen by the kernel.
+* `ipam` (dictionary, required): IPAM configuration to be used for this network.
 
 ## Notes
 
 * If are testing on a laptop, please remember that most wireless cards do not support being enslaved by macvlan.
 * A single master interface can not be enslaved by both `macvlan` and `ipvlan`.
+
