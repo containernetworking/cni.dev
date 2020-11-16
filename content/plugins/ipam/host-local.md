@@ -1,7 +1,7 @@
 ---
 title: host-local IP address management plugin
 description: "plugins/ipam/host-local/README.md"
-date: 2020-11-02
+date: 2017-08-11
 toc: true
 draft: false
 weight: 200
@@ -127,10 +127,6 @@ The following [args conventions](https://github.com/containernetworking/cni/blob
 
 * `ips` (array of strings): A list of custom IPs to attempt to allocate
 
-The following [Capability Args](https://github.com/containernetworking/cni/blob/master/CONVENTIONS.md) are supported:
-
-* `ipRanges`: The exact same as the `ranges` array - a list of address pools
-
 ### Custom IP allocation
 For every requested custom IP, the `host-local` allocator will request that IP
 if it falls within one of the `range` objects. Thus it is possible to specify
@@ -147,3 +143,4 @@ The path can be customized with the `dataDir` option listed above. Environments
 where IPs are released automatically on reboot (e.g. running containers are not
 restored) may wish to specify `/var/run/cni` or another tmpfs mounted directory
 instead.
+

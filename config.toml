@@ -26,9 +26,9 @@ latest = "v0.8.7"
 latestUrl = "https://v0-8-7.cni.dev"
 
 # Site information (i.e., the site currently being served)
-fullversion = "v0.7.6"
-version = "v0.7.6"
-docsbranch = "release-0.7.6"
+fullversion = "v0.6.0"
+version = "v0.6.0"
+docsbranch = "release-0.6.0"
 deprecated = true
 
 # Version menu entries

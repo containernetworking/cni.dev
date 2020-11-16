@@ -6,7 +6,7 @@ command = "make production-build"
 HUGO_VERSION = "0.75.1"
 
 [context.production.environment]
-HUGO_BASEURL = "https://deploy-preview-26--cni.netlify.app/"
+HUGO_BASEURL = "https://www.cni.dev/"
 HUGO_ENV = "production"
 HUGO_ENABLEGITINFO = "true"
 
