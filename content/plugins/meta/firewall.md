@@ -137,8 +137,8 @@ CNI-FORWARD will have a pair of rules added, one for each direction, using the I
 of the container as shown:
 
 `CNI-FORWARD` chain:
-- `-s 10.88.0.2 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`
-- `-d 10.88.0.2 -j ACCEPT`
+- `-d 10.88.0.2 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`
+- `-s 10.88.0.2 -j ACCEPT`
 
 The `CNI-FORWARD` chain first sends all traffic to `CNI-ADMIN` chain, which is intended as an user-controlled chain for custom rules that run prior to rules managed by the `firewall` plugin. The `firewall` plugin does not add, delete or modify rules in the `CNI-ADMIN` chain.
 
