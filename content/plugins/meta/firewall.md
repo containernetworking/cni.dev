@@ -21,22 +21,22 @@ The following network configuration file
     "cniVersion": "0.3.1",
     "name": "bridge-firewalld",
     "plugins": [
-      {
-        "type": "bridge",
-        "bridge": "cni0",
-        "isGateway": true,
-        "ipMasq": true,
-        "ipam": {
-            "type": "host-local",
-            "subnet": "10.88.0.0/16",
-            "routes": [
-                { "dst": "0.0.0.0/0" }
-            ]
+        {
+            "type": "bridge",
+            "bridge": "cni0",
+            "isGateway": true,
+            "ipMasq": true,
+            "ipam": {
+                "type": "host-local",
+                "subnet": "10.88.0.0/16",
+                "routes": [
+                    { "dst": "0.0.0.0/0" }
+                ]
+            }
+        },
+        {
+            "type": "firewall"
         }
-      },
-      {
-        "type": "firewall"
-      }
     ]
 }
 ```
@@ -64,23 +64,23 @@ look like:
     "cniVersion": "0.3.1",
     "name": "bridge-firewalld",
     "plugins": [
-      {
-        "type": "bridge",
-        "bridge": "cni0",
-        "isGateway": true,
-        "ipMasq": true,
-        "ipam": {
-            "type": "host-local",
-            "subnet": "10.88.0.0/16",
-            "routes": [
-                { "dst": "0.0.0.0/0" }
-            ]
+        {
+            "type": "bridge",
+            "bridge": "cni0",
+            "isGateway": true,
+            "ipMasq": true,
+            "ipam": {
+                "type": "host-local",
+                "subnet": "10.88.0.0/16",
+                "routes": [
+                    { "dst": "0.0.0.0/0" }
+                ]
+            }
+        },
+        {
+            "type": "firewall",
+            "backend": "firewalld"
         }
-      },
-      {
-        "type": "firewall",
-        "backend": "firewalld"
-      }
     ]
 }
 ```
@@ -103,23 +103,23 @@ look like:
     "cniVersion": "0.3.1",
     "name": "bridge-firewalld",
     "plugins": [
-      {
-        "type": "bridge",
-        "bridge": "cni0",
-        "isGateway": true,
-        "ipMasq": true,
-        "ipam": {
-            "type": "host-local",
-            "subnet": "10.88.0.0/16",
-            "routes": [
-                { "dst": "0.0.0.0/0" }
-            ]
+        {
+            "type": "bridge",
+            "bridge": "cni0",
+            "isGateway": true,
+            "ipMasq": true,
+            "ipam": {
+                "type": "host-local",
+                "subnet": "10.88.0.0/16",
+                "routes": [
+                    { "dst": "0.0.0.0/0" }
+                ]
+            }
+        },
+        {
+            "type": "firewall",
+            "backend": "iptables"
         }
-      },
-      {
-        "type": "firewall",
-        "backend": "iptables"
-      }
     ]
 }
 ```
@@ -147,10 +147,10 @@ The `CNI-FORWARD` chain first sends all traffic to `CNI-ADMIN` chain, which is i
 
 The chain name `CNI-ADMIN` can be overridden by specifying `iptablesAdminChainName` in the plugin configuration
 
-```
-      {
-        "type": "firewall",
-	"backend": "iptables",
-	"iptablesAdminChainName": "SOME-OTHER-CHAIN-NAME",
-      }
+```json
+{
+    "type": "firewall",
+    "backend": "iptables",
+    "iptablesAdminChainName": "SOME-OTHER-CHAIN-NAME",
+}
 ```
