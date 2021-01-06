@@ -39,8 +39,8 @@ contentDir = "/content/"
 version_menu = "Versions"
 
 # Latest released version information
-latest = "v0.8.7"
-latestUrl = "https://v0-8-7.cni.dev"
+latest = "v0.9.0"
+latestUrl = "https://v0-9-0.cni.dev"
 
 # Site information (i.e., the site currently being served)
 fullversion = "v0.7.6"
@@ -52,12 +52,19 @@ deprecated = true
 
 ## Current version menu entry
 [[params.versions]]
-fullversion = "v0.8.8"
+fullversion = "v0.9.1"
 version = "Current"
 docsbranch = "master"
 url = "https://www.cni.dev"
 
-## v0.8.7 (latest) version menu entry
+## v0.9.0 (latest) version menu entry
+[[params.versions]]
+fullversion = "v0.9.0"
+version = "v0.9.0"
+docsbranch = "release-0.9.0"
+url = "https://v0-9-0.cni.dev"
+
+## v0.8.7 version menu entry
 [[params.versions]]
 fullversion = "v0.8.7"
 version = "v0.8.7"
