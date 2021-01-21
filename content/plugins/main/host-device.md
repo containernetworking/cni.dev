@@ -13,6 +13,8 @@ Move an already-existing device into a container.
 
 This simple plugin will move the requested device from the host's network namespace
 to the container's. IPAM configuration can be used for this plugin.
+This plugin can also be used for a device bound to dpdk driver via `pciBusID` or
+runtimeConfig `deviceID` parameter then IPAM configuration will be ignored.
 
 ## Network configuration reference
 
