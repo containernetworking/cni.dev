@@ -1,0 +1,9 @@
+
+# Link check code based on Luc Perkins etcd-io/website
+# https://github.com/etcd-io/website/commit/5ed6c700096509c7b436de440e9cc72a8475fb0b#diff-76ed074a9305c04054cdebb9e9aad2d818052b07091de1f20cad0bbac34ffb52
+
+DirectoryPath: public
+IgnoreDirectoryMissingTrailingSlash: true
+CheckExternal: false
+IgnoreAltMissing: true
+
