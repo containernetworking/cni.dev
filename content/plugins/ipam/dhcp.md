@@ -30,7 +30,9 @@ use this prefix for DHCP socket as `<prefix>/run/cni/dhcp.sock`. You can use
 this prefix for references to the host filesystem, e.g. to access netns and the
 unix socket.  
 If given `-broadcast=true` argument after 'daemon', the dhcp plugin will
-enable the broadcast flag on DHCP packets.
+enable the broadcast flag on DHCP packets.  
+If given `-timeout <duration>` arguments after 'daemon', the dhcp daemon will
+time out unanswered dhcp requests after this duration, defaults to `10s`.
 
 Alternatively, you can use systemd socket activation protocol.
 Be sure that the .socket file uses /run/cni/dhcp.sock as the socket path.
