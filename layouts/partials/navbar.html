@@ -36,11 +36,13 @@
         </li>
         {{ end }}
       </ul>
+      {{ if eq "plugins" (index (split .Page.RelPermalink "/") 1) }}
       <ul class="navbar-nav">
         <li class="navbar-item nav-link dropdown">
           {{ partial "navbar-version-selector.html" . }}
         </li>
       </ul>
+      {{ end }}
       <ul class="navbar-nav float-right">
         {{ with $social }}
         <li class="navbar-item">

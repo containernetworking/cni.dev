@@ -1,33 +1,39 @@
 {{ $allSections  := site.Sections }} <!-- "blog" and "docs" -->
 {{ $docsSections := where $allSections "Section" "plugins" }} <!-- "getting-started" and "deployment" -->
 {{ $thisUrl      := .RelPermalink }} <!-- the URL of the current page -->
+{{ $thisVersion  := index (split $thisUrl "/") 2 }}
 
+{{ if eq "plugins" (index (split .Page.RelPermalink "/") 1) }}
 {{ range $docsSections }}
 {{ $isThisPage := eq .RelPermalink $thisUrl }}
 <nav class="section-nav">
   <p class="menu-label">Plugins:</p>
   <ul class="menu-list">
-    <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
-    {{ range .RegularPages }}
-      <ul>
-        <li>
-        <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">
-          {{ .LinkTitle | markdownify }}
-        </a>
-        </li>
-      </ul>
-    {{ end }}
-    </li>
-  {{ range .Sections }}
+    {{ range .Sections }}
+    {{ if eq $thisVersion (index (split .CurrentSection "/") 2) }}
     <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
       <ul>
         {{ range .CurrentSection.RegularPages }}
         <li>
-            <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
+          <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
         </li>
         {{ end }}
       </ul>
     </li>
-  {{ end }}
-{{ end }}
+
+    {{ range .Sections }}
+    <li><a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .CurrentSection.LinkTitle | markdownify }}</a>
+      <ul>
+        {{ range .CurrentSection.RegularPages }}
+        <li>
+          <a {{ if $isThisPage }} class="active" {{ end }} href="{{ .RelPermalink }}">{{ .Page.LinkTitle | markdownify }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </li>
+    {{ end }}
+    {{ end }}
+    {{ end }}
 </nav>
+{{ end }}
+{{ end }}
