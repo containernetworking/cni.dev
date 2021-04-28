@@ -16,7 +16,7 @@ The list below is not complete, and we advise to get the current project state f
 
 ### [v1.0.0](https://github.com/containernetworking/cni/milestones/v1.0.0)
 
-- Targeted for April 2020
+- Targeted for ~April 2020~ April 2021
 - More precise specification language
 - Stable SPEC
 - Complete test coverage
