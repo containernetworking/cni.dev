@@ -9,7 +9,7 @@ weight: 200
 
 ## Overview
 
-This plugin can change some system controls (sysctls) and several interface attributes (promiscuous mode, MTU and MAC address) in the network namespace.
+This plugin can change some system controls (sysctls) and several interface attributes (promiscuous mode, all-multicast mode, MTU and MAC address) in the network namespace.
 It does not create any network interfaces and therefore does not bring connectivity by itself.
 It is only useful when used in addition to other plugins.
 
@@ -32,7 +32,7 @@ A successful result would simply be:
 { }
 ```
 
-## Network sysctls documentation
+### Network sysctls documentation
 
 Some network sysctls are documented in the Linux sources:
 
@@ -41,28 +41,31 @@ Some network sysctls are documented in the Linux sources:
 - [Documentation/networking/](https://www.kernel.org/doc/Documentation/networking/)
 
 ## Interface Attribute Operation
-The parameters, "mac", "mtu" and "promisc", changes the interface attributes as followings:
+The following configuration example will change all the supported attributes on the interface
+determined by [CNI_IFNAME](https://github.com/containernetworking/cni/blob/master/SPEC.md#parameters):
 
 ```json
 {
   "name": "mytuning",
   "type": "tuning",
-  "promisc": true,
   "mac": "c2:b0:57:49:47:f1",
-  "mtu": 1454
+  "mtu": 1454,
+  "promisc": true,
+  "allmulti": true
 }
 ```
 
-## Interface attribute configuration reference
+### Interface attribute configuration reference
 
 * `mac` (string, optional): MAC address (i.e. hardware address) of interface
 * `mtu` (integer, optional): MTU of interface
 * `promisc` (bool, optional): Change the promiscuous mode of interface
+* `allmulti` (bool, optional): Change the all-multicast mode of interface. If enabled, all multicast packets on the network will be received by the interface.
 
 ## Supported arguments
 The following [CNI_ARGS](https://github.com/containernetworking/cni/blob/master/SPEC.md#parameters) are supported:
 
-* `MAC`: request a specific MAC address for the interface 
+* `MAC`: request a specific MAC address for the interface
 
     (example: CNI_ARGS="IgnoreUnknown=true;MAC=c2:11:22:33:44:55")
 
@@ -77,4 +80,5 @@ The following [args conventions](https://github.com/containernetworking/cni/blob
 * `mac` (string, optional): MAC address (i.e. hardware address) of interface
 * `mtu` (integer, optional): MTU of interface
 * `promisc` (bool, optional): Change the promiscuous mode of interface
+* `allmulti` (bool, optional): Change the all-multicast mode of interface
 * `sysctl` (object, optional): Change system controls
