@@ -65,3 +65,21 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 *Note:* The VLAN parameter configures the VLAN tag on the host end of the veth and also enables the vlan_filtering feature on the bridge interface.
 
 *Note:* To configure uplink for L2 network you need to allow the vlan on the uplink interface by using the following command ``` bridge vlan add vid VLAN_ID dev DEV```.
+
+## Interface configuration arguments reference
+
+The following [CNI_ARGS](https://github.com/containernetworking/cni/blob/master/SPEC.md#parameters) are supported:
+
+* `MAC`: request a specific MAC address for the interface
+
+    (example: CNI_ARGS="MAC=c2:11:22:33:44:55")
+
+Note: You may add `IgnoreUnknown=true` to allow loose CNI argument verification (see CNI's issue[#560](https://github.com/containernetworking/cni/issues/560)).
+
+The plugin also support following [capability argument](https://github.com/containernetworking/cni/blob/master/CONVENTIONS.md).
+
+* `mac`: Pass MAC addresses for CNI interface
+
+The following [args conventions](https://github.com/containernetworking/cni/blob/master/CONVENTIONS.md#args-in-network-config) are supported:
+
+* `mac` (string, optional): MAC address (i.e. hardware address) of interface
