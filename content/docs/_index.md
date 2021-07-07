@@ -16,8 +16,9 @@ To avoid duplication, we think it is prudent to define a common interface betwee
 ## Who is using CNI?
 
 ### Container runtimes
-- [rkt](https://coreos.com/blog/rkt-cni-networking.html) - a container engine
 - [Kubernetes](https://kubernetes.io/docs/admin/network-plugins/) - a system to simplify container operations
+- [Containerd](https://containerd.io/) - A CRI-compliant container runtime
+- [cri-o](https://cri-o.io/) - A lightweight container runtime
 - [OpenShift](https://github.com/openshift/origin/blob/master/docs/openshift_networking_requirements.md) - Kubernetes with additional enterprise features
 - [Cloud Foundry](https://github.com/cloudfoundry-incubator/cf-networking-release) - a platform for cloud applications
 - [Apache Mesos](https://github.com/apache/mesos/blob/master/docs/cni.md) - a distributed systems kernel

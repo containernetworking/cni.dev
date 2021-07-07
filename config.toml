@@ -35,8 +35,8 @@ contentDir = "/content/"
 version_menu = "Versions"
 
 [params.versions]
-latest = "v0.9"
-all    = ["current", "v0.9", "v0.8", "v0.7", "v0.6"]
+latest = "v1.0"
+all    = ["current", "v1.0", "v0.9", "v0.8", "v0.7", "v0.6"]
 
 [params.logos]
 navbar = "cni-horizontal-color.png"
