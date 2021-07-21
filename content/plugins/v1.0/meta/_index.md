@@ -8,7 +8,6 @@ weight: 100
 
 ## Meta: other plugins
 
-* [`flannel`](flannel): Generates an interface corresponding to a flannel config file
 * [`tuning`](tuning): Changes sysctl parameters of an existing interface
 * [`portmap`](portmap): An iptables-based portmapping plugin. Maps ports from the host's address space to the container
 * [`bandwidth`](bandwidth): Allows bandwidth-limiting through use of traffic control tbf (ingress/egress)

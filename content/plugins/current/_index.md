@@ -37,7 +37,6 @@ Read [CONTRIBUTING](CONTRIBUTING.md) for build and test instructions.
 
 ### Meta: other plugins
 
-* [`flannel`](meta/flannel): Generates an interface corresponding to a flannel config file
 * [`tuning`](meta/tuning): Changes sysctl parameters of an existing interface
 * [`portmap`](meta/portmap): An iptables-based portmapping plugin. Maps ports from the host's address space to the container
 * [`bandwidth`](meta/bandwidth): Allows bandwidth-limiting through use of traffic control tbf (ingress/egress)
