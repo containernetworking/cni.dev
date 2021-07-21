@@ -1,6 +1,6 @@
 ---
 title: "CNI"
-description: "The Container Network Interface"
+description: "The Container Networking Interface Specification"
 date: 2020-10-31
 draft: false
 toc: true
@@ -65,7 +65,7 @@ If you intend to contribute to code or documentation, please read the [CONTRIBUT
 
 ### Requirements
 
-The CNI spec is language agnostic. To use the Go language libraries in this repository, you'll need a recent version of Go. You can find the Go versions covered by our [automated tests](https://travis-ci.org/containernetworking/cni/builds) in [.travis.yaml](https://github.com/containernetworking/cni/blob/master/.travis.yml).
+The CNI spec is language agnostic. To use the Go language libraries in this repository, you'll need a recent version of Go.
 
 ### Reference Plugins
 

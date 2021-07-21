@@ -9,11 +9,7 @@ cascade:
   version: v0.9
 ---
 
-[![Build Status](https://travis-ci.org/containernetworking/plugins.svg?branch=master)](https://travis-ci.org/containernetworking/plugins)
-
-This is a list of CNI network plugins maintained by the containernetworking team. For more information, see the individual READMEs.
-
-Read [CONTRIBUTING](CONTRIBUTING.md) for build and test instructions.
+These are general-purpose CNI network plugins maintained by the containernetworking team. For more information, see the individual plugin pages.
 
 ## Reference plugins:
 

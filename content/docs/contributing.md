@@ -28,8 +28,7 @@ contribution. See the [DCO](/docs/dco/) file for details.
 
 The project uses the cni-dev email list, IRC chat, and Slack:
 - Email: [cni-dev](https://groups.google.com/forum/#!forum/cni-dev)
-- IRC: #[containernetworking](irc://irc.freenode.net:6667/#containernetworking) channel on [freenode.net](https://freenode.net/)
-- Slack: #cni on the [CNCF slack](https://slack.cncf.io/).  NOTE: the previous CNI Slack (containernetworking.slack.com) has been sunsetted.
+- Slack: #cni and #cni-dev on the [CNCF slack](https://slack.cncf.io/).  NOTE: the previous CNI Slack (containernetworking.slack.com) has been sunsetted.
 
 Please avoid emailing maintainers found in the MAINTAINERS file directly. They
 are very busy and read the mailing lists.
@@ -58,25 +57,12 @@ This is a rough outline of how to prepare a contribution:
 
 ## How to run the test suite
 
-We generally require test coverage of any new features or bug fixes.
+We generally require test coverage of any new features or bug fixes. Just run
 
-Here's how you can run the test suite on any system (even Mac or Windows) using
- [Vagrant](https://www.vagrantup.com/) and a hypervisor of your choice:
-
-```bash
-vagrant up
-vagrant ssh
-# you're now in a shell in a virtual machine
-sudo su
-cd /go/src/github.com/containernetworking/cni
-
-# to run the full test suite
-./test.sh
-
-# to focus on a particular test suite
-cd libcni
-go test
 ```
+./test.sh
+```
+
 
 ## Acceptance policy
 
