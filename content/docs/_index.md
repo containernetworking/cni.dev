@@ -1,6 +1,6 @@
 ---
 title: "CNI"
-description: "The Container Network Interface"
+description: "The Container Networking Interface Specification"
 date: 2020-10-31
 draft: false
 toc: true
@@ -16,8 +16,9 @@ To avoid duplication, we think it is prudent to define a common interface betwee
 ## Who is using CNI?
 
 ### Container runtimes
-- [rkt](https://coreos.com/blog/rkt-cni-networking.html) - a container engine
 - [Kubernetes](https://kubernetes.io/docs/admin/network-plugins/) - a system to simplify container operations
+- [Containerd](https://containerd.io/) - A CRI-compliant container runtime
+- [cri-o](https://cri-o.io/) - A lightweight container runtime
 - [OpenShift](https://github.com/openshift/origin/blob/master/docs/openshift_networking_requirements.md) - Kubernetes with additional enterprise features
 - [Cloud Foundry](https://github.com/cloudfoundry-incubator/cf-networking-release) - a platform for cloud applications
 - [Apache Mesos](https://github.com/apache/mesos/blob/master/docs/cni.md) - a distributed systems kernel
@@ -64,7 +65,7 @@ If you intend to contribute to code or documentation, please read the [CONTRIBUT
 
 ### Requirements
 
-The CNI spec is language agnostic. To use the Go language libraries in this repository, you'll need a recent version of Go. You can find the Go versions covered by our [automated tests](https://travis-ci.org/containernetworking/cni/builds) in [.travis.yaml](https://github.com/containernetworking/cni/blob/master/.travis.yml).
+The CNI spec is language agnostic. To use the Go language libraries in this repository, you'll need a recent version of Go.
 
 ### Reference Plugins
 

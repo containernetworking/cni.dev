@@ -1,12 +1,11 @@
 ---
 title: Plugins Overview
-description: "plugins/README.md"
 date: 2020-11-02
 toc: true
 draft: false
 weight: 200
 cascade:
-  version: v0.9
+  version: v1.0
 ---
 
 These are general-purpose CNI network plugins maintained by the containernetworking team. For more information, see the individual plugin pages.
@@ -33,7 +32,6 @@ These are general-purpose CNI network plugins maintained by the containernetwork
 
 ### Meta: other plugins
 
-* [`flannel`](meta/flannel): Generates an interface corresponding to a flannel config file
 * [`tuning`](meta/tuning): Changes sysctl parameters of an existing interface
 * [`portmap`](meta/portmap): An iptables-based portmapping plugin. Maps ports from the host's address space to the container
 * [`bandwidth`](meta/bandwidth): Allows bandwidth-limiting through use of traffic control tbf (ingress/egress)

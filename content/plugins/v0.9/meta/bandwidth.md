@@ -9,7 +9,7 @@ weight: 200
 
 ## Overview
 
-This plugin provides a way to use and configure Linux's Traffic control (tc) subystem. tc encompasses the sets of mechanisms and operations by which packets are queued for transmission/reception on a network interface.
+This plugin provides a way to use and configure Linux's Traffic control (tc) subsystem. tc encompasses the sets of mechanisms and operations by which packets are queued for transmission/reception on a network interface.
 
 This plugin configures a token bucket filter (tbf) queuing discipline (qdisc) on both ingress and egress traffic. Resulting in traffic being shaped when reading / writing.
 
