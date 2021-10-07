@@ -9,7 +9,9 @@ weight: 200
 
 ## Overview
 
-This plugin can change some system controls (sysctls) and several interface attributes (promiscuous mode, all-multicast mode, MTU and MAC address) in the network namespace.
+This plugin can change some system controls (sysctls) and several
+interface attributes (promiscuous mode, all-multicast mode, MTU and MAC
+address) in the network namespace.
 It does not create any network interfaces and therefore does not bring connectivity by itself.
 It is only useful when used in addition to other plugins.
 
@@ -20,11 +22,14 @@ The following network configuration file
   "name": "mytuning",
   "type": "tuning",
   "sysctl": {
-          "net.core.somaxconn": "500"
+          "net.core.somaxconn": "500",
+          "net.ipv4.conf.IFNAME.arp_filter": "1"
   }
 }
 ```
-will set /proc/sys/net/core/somaxconn to 500.
+will set /proc/sys/net/core/somaxconn to 500 and /proc/sys/net/ipv4/conf/IFNAME/arp_filter to 1,
+while `IFNAME` in the path will be substituted with an interface name passed to this plugin.
+That substitution is allowing to set sysctls specific to a particular network interface.
 Other sysctls can be modified as long as they belong to the network namespace (`/proc/sys/net/*`).
 
 A successful result would simply be:
