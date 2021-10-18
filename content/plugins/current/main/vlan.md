@@ -15,7 +15,7 @@ The vlan plugin creates a vlan subinterface off an enslaved interface in the hos
 ```json
 {
 	"name": "mynet",
-	"cniVersion": "1.0.0",
+	"cniVersion": "0.3.1",
 	"type": "vlan",
 	"master": "eth0",
 	"mtu": 1500,
