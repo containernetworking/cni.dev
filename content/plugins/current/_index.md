@@ -19,6 +19,7 @@ These are general-purpose CNI network plugins maintained by the containernetwork
 * [`macvlan`](main/macvlan): Creates a new MAC address, forwards all traffic to that to the container
 * [`ptp`](main/ptp): Creates a veth pair
 * [`host-device`](main/host-device): Moves an already-existing device into a container
+* [`vlan`](main/vlan): Creates a vlan interface off a master
 
 #### Windows: windows specific
 
