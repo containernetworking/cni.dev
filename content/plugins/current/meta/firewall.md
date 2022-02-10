@@ -154,3 +154,48 @@ The chain name `CNI-ADMIN` can be overridden by specifying `iptablesAdminChainNa
     "iptablesAdminChainName": "SOME-OTHER-CHAIN-NAME",
 }
 ```
+
+## Ingress Policy
+
+Starting with v1.1.0, the `firewall` plugin supports `ingressPolicy` for isolating bridges.
+```json
+{
+    "type": "firewall",
+    "ingressPolicy": "same-bridge"
+}
+```
+
+The supported values are `open` and `same-bridge`.
+
+- `open` is the default and does NOP.
+
+- `same-bridge` creates "CNI-ISOLATION-STAGE-1" and "CNI-ISOLATION-STAGE-2"
+that are similar to Docker libnetwork's "DOCKER-ISOLATION-STAGE-1" and
+"DOCKER-ISOLATION-STAGE-2" rules.
+
+e.g., when `ns1` and `ns2` are connected to bridge `cni1`, and `ns3` is
+connected to bridge `cni2`, the `same-bridge` ingress policy disallows
+communications between `ns1` and `ns3`, while allowing communications
+between `ns1` and `ns2`.
+
+```bash
+iptables -N CNI-ISOLATION-STAGE-1
+iptables -N CNI-ISOLATION-STAGE-2
+iptables -I FORWARD -j CNI-ISOLATION-STAGE-1
+iptables -A CNI-ISOLATION-STAGE-1 -i cni1 ! -o cni1 -j CNI-ISOLATION-STAGE-2
+iptables -A CNI-ISOLATION-STAGE-1 -i cni2 ! -o cni2 -j CNI-ISOLATION-STAGE-2
+iptables -A CNI-ISOLATION-STAGE-1 -j RETURN
+iptables -A CNI-ISOLATION-STAGE-2 -o cni1 -j DROP
+iptables -A CNI-ISOLATION-STAGE-2 -o cni2 -j DROP
+iptables -A CNI-ISOLATION-STAGE-2 -j RETURN
+```
+
+The number of commands is O(N) where N is the number of the bridges (not the number of the containers).
+
+Run `sudo iptables-save -t filter` to confirm the added rules.
+
+The `same-bridge` ingress policy is expected to be used in conjunction
+with `bridge` plugin. May not work as expected with other "main" plugins.
+
+It should be also noted that the `same-bridge` ingress policy executes
+raw `iptables` commands directly, even when the `backend` is set to `firewalld`.
