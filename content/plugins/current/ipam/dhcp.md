@@ -39,17 +39,46 @@ Be sure that the .socket file uses /run/cni/dhcp.sock as the socket path.
 
 With the daemon running, containers using the dhcp plugin can be launched.
 
+## DHCP Options
+
+Not all DHCP options are supported when requesting from server. Current supported are:
+
+* `ip-address`, `subnet-mask`
+* `static-routes`, `classless-static-routes`, `routers`
+* `dhcp-lease-time`, `dhcp-renewal-time`, `dhcp-rebinding-time`
+
+See `man:dhcp-options(5)` for description of these names. Also, you can use option ID instead of names, like `121` for `classless-static-routes`.
 ## Example configuration
 
+For example, to send hostname to the DHCP server when using Podman runtime, use this config:
 ```json
 {
-	"ipam": {
-		"type": "dhcp"
-	}
+    "ipam": {
+        "type": "dhcp",
+        "daemonSocketPath": "/run/cni/dhcp.sock",
+        "request": [
+            {
+                "skipDefault": false
+            }
+        ],
+        "provide": [
+            {
+                "option": "host-name",
+                "fromArg": "K8S_POD_NAME"
+            }
+        ]
+    }
 }
 ```
 
 ## Network configuration reference
 
 * `type` (string, required): "dhcp"
-
+* `daemonSocketPath` (string, optional): Path to the socket of daemon. If `-hostprefix` is set for the daemon, this value should be set to `<prefix>/run/cni/dhcp.sock`.
+* `request` (dict, optional): Options requesting from DHCP server.
+    * `skipDefault` (bool, optional): If the default request list is skipped.
+    * `option` (string, optional): String or number representation of the DHCP option.
+* `provide` (dict, optional): Options providing to DHCP server when acquire leases.
+    * `option` (string, optional): String or number representation of the DHCP option.
+    * `value` (string, optional): String representation of the value. Directly sent to server.
+    * `fromArg` (string, optional): Get value from `CNI_ARGS` by given argument name.
