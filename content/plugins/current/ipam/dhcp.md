@@ -25,8 +25,10 @@ $ ./dhcp daemon
 
 If given `-pidfile <path>` arguments after 'daemon', the dhcp plugin will write
 its PID to the given file.  
+If given `-socketpath <socketpath>` arguments after 'daemon', the dhcp plugin will
+use this path for DHCP socket, defaults to `/run/cni/dhcp.sock`.
 If given `-hostprefix <prefix>` arguments after 'daemon', the dhcp plugin will
-use this prefix for DHCP socket as `<prefix>/run/cni/dhcp.sock`. You can use
+use this prefix for DHCP socket as `<prefix><socketpath>`. You can use
 this prefix for references to the host filesystem, e.g. to access netns and the
 unix socket.  
 If given `-broadcast=true` argument after 'daemon', the dhcp plugin will
@@ -74,7 +76,7 @@ For example, to send hostname to the DHCP server when using Podman runtime, use 
 ## Network configuration reference
 
 * `type` (string, required): "dhcp"
-* `daemonSocketPath` (string, optional): Path to the socket of daemon. If `-hostprefix` is set for the daemon, this value should be set to `<prefix>/run/cni/dhcp.sock`.
+* `daemonSocketPath` (string, optional): Path to the socket of daemon. If `-socketpath` or `-hostprefix` is set for the daemon, this value should be set to `<hostprefix><socketpath>`.
 * `request` (dict, optional): Options requesting from DHCP server.
     * `skipDefault` (bool, optional): If the default request list is skipped.
     * `option` (string, optional): String or number representation of the DHCP option.
