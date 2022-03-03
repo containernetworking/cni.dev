@@ -87,3 +87,20 @@ The following [args conventions](https://github.com/containernetworking/cni/blob
 * `promisc` (bool, optional): Change the promiscuous mode of interface
 * `allmulti` (bool, optional): Change the all-multicast mode of interface
 * `sysctl` (object, optional): Change system controls
+
+## Sysctl allowlist
+
+By default all sysctls can be modified by the plugin. This can be changed by providing an allow-list of sysctl on each node. The allow-list should contain a list of regular expressions of allowed values.
+The allow-list should be placed in the following location on each node:
+
+```
+/etc/cni/tuning/allowlist.conf
+```
+
+The allow list must be specified on each node. The plugins on the nodes will use the list specified on the node it's running on. If the file is not present, the plugin will allow all sysctls to be used.
+Below is an example of an allow-list file:
+
+```
+^net\.ipv4\.conf\.all\.[a-z_]*$
+^net\.ipv4\.conf\.IFNAME\.[a-z_]*$
+```
