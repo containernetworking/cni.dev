@@ -12,6 +12,7 @@ weight: 100
 * [`macvlan`](macvlan): Creates a new MAC address, forwards all traffic to that to the container
 * [`ptp`](ptp): Creates a veth pair
 * [`host-device`](host-device): Moves an already-existing device into a container
+* [`vlan`](vlan): Creates a vlan interface off a master
 
 ### Windows: windows specific
 * [`win-bridge`](win-bridge): Creates a bridge, adds the host and the container to it

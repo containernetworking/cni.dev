@@ -62,6 +62,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `promiscMode` (boolean, optional): set promiscuous mode on the bridge. Defaults to false.
 * `vlan` (int, optional): assign VLAN tag. Defaults to none.
 * `enabledad` (boolean, optional): enables duplicate address detection for the container side veth. Defaults to false.
+* `macspoofchk` (boolean, optional): Enables mac spoof check, limiting the traffic originating from the container to the mac address of the interface. Defaults to false.
 
 *Note:* The VLAN parameter configures the VLAN tag on the host end of the veth and also enables the vlan_filtering feature on the bridge interface.
 
