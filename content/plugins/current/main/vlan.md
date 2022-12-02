@@ -19,7 +19,8 @@ The vlan plugin creates a vlan subinterface off an enslaved interface in the hos
 	"type": "vlan",
 	"master": "eth0",
 	"mtu": 1500,
-	"vlanId": 5,
+	"vlanId": 5, 
+	"linkInContainer": false,
 	"ipam": {
 		"type": "host-local",
 		"subnet": "10.1.1.0/24"
@@ -39,3 +40,4 @@ The vlan plugin creates a vlan subinterface off an enslaved interface in the hos
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to value chosen by the kernel.
 * `ipam` (dictionary, required): IPAM configuration to be used for this network.
 * `dns` (dictionary, optional): DNS information to return as described in the [Result](https://github.com/containernetworking/cni/blob/master/SPEC.md#result).
+* `linkInContainer` (boolean, optional) specifies if the master interface is in the container network namespace or the main network namespace

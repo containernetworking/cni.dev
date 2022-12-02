@@ -23,6 +23,7 @@ Because all ipvlan interfaces share the MAC address with the host interface, DHC
 	"name": "mynet",
 	"type": "ipvlan",
 	"master": "eth0",
+	"linkInContainer": false,
 	"ipam": {
 		"type": "host-local",
 		"subnet": "10.1.2.0/24"
@@ -38,6 +39,7 @@ Because all ipvlan interfaces share the MAC address with the host interface, DHC
 * `mode` (string, optional): one of "l2", "l3", "l3s". Defaults to "l2".
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to the value chosen by the kernel.
 * `ipam` (dictionary, required unless chained): IPAM configuration to be used for this network.
+* `linkInContainer` (boolean, optional) specifies if the master interface is in the container network namespace or the main network namespace
 
 ## Notes
 
