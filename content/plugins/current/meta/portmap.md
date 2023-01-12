@@ -15,6 +15,7 @@ You should use this plugin as part of a network configuration list. It accepts
 the following configuration options:
 
 * `snat` - boolean, default true. If true or omitted, set up the SNAT chains
+* `masqAll` - boolean, default false. If false or omitted, the `snat` rule set up on loopback & hairpin traffic, else will `snat` all source traffic. 
 * `markMasqBit` - int, (0-31), default 13. The mark bit to use for masquerading (see section SNAT). Cannot be set when `externalSetMarkChain` is used.
 * `externalSetMarkChain` - string, default nil. If you already have a Masquerade mark chain (e.g. Kubernetes), specify it here. This will use that instead of creating a separate chain. When this is set, `markMasqBit` must be unspecified.
 * `conditionsV4`, `conditionsV6` - array of strings. A list of arbitrary `iptables` 
@@ -108,6 +109,7 @@ connections, just the first packet.
 Some packets also need to have the source address rewritten:
 * connections from localhost
 * Hairpin traffic back to the container.
+* Plugins which traffic not go though default net namespace e.g., ipvlan,macvlan,etc. (need `masqAll` option)
 
 In the DNAT chain, a bit is set on the mark for packets that need snat. This
 chain performs that masquerading. By default, bit 13 is set, but this is
