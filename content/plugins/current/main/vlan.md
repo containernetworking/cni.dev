@@ -8,7 +8,9 @@ weight: 200
 ---
 
 ## Overview
-The vlan plugin creates a vlan subinterface off an enslaved interface in the host network namespace and the container using a veth device. One end of the veth pair is placed inside a container and the other end is a subinterface off the master in the host network namespace. The host-local IPAM plugin can be used to allocate an IP address to the container. The traffic of the container interface will be routed through the interface of the host.
+The vlan plugin creates a vlan subinterface off an master interface in the host network namespace and place the vlan subinterface inside the container namespace. Each container must use different `master` and `vlanId` pair.
+
+The host-local IPAM plugin can be used to allocate an IP address to the container. The traffic of the container interface will be bridged through the master interface.
 
 ## Example network configuration
 
