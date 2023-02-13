@@ -47,22 +47,6 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 }
 ```
 
-## Example L2-only vlan configuration
-```json
-{
-    "cniVersion": "0.3.1",
-    "name": "mynet",
-    "type": "bridge",
-    "bridge": "mynet0",
-    "vlan": 100,
-    "vlanTrunk": [
-        { "id": 101 },
-        { "minID": 200, "maxID": 299 }
-    ],
-    "ipam": {}
-}
-```
-
 ## Network configuration reference
 
 * `name` (string, required): the name of the network.
@@ -77,7 +61,6 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `ipam` (dictionary, required): IPAM configuration to be used for this network. For L2-only network, create empty dictionary.
 * `promiscMode` (boolean, optional): set promiscuous mode on the bridge. Defaults to false.
 * `vlan` (int, optional): assign VLAN tag. Defaults to none.
-* `vlanTrunk` (list, optional): assign VLAN trunk tag. Defaults to none.
 * `enabledad` (boolean, optional): enables duplicate address detection for the container side veth. Defaults to false.
 * `macspoofchk` (boolean, optional): Enables mac spoof check, limiting the traffic originating from the container to the mac address of the interface. Defaults to false.
 

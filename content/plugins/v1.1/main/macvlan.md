@@ -20,7 +20,6 @@ Since each macvlan interface has its own MAC address, it makes it easy to use wi
 	"name": "mynet",
 	"type": "macvlan",
 	"master": "eth0",
-	"linkInContainer": false,
 	"ipam": {
 		"type": "dhcp"
 	}
@@ -35,7 +34,6 @@ Since each macvlan interface has its own MAC address, it makes it easy to use wi
 * `mode` (string, optional): one of "bridge", "private", "vepa", "passthru". Defaults to "bridge".
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to the value chosen by the kernel. The value must be \[0, master's MTU\].
 * `ipam` (dictionary, required): IPAM configuration to be used for this network. For interface only without ip address, create empty dictionary.
-* `linkInContainer` (boolean, optional) specifies if the master interface is in the container network namespace or the main network namespace
 
 ## Notes
 

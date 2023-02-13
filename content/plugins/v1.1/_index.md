@@ -5,7 +5,7 @@ toc: true
 draft: false
 weight: 200
 cascade:
-  version: current
+  version: v1.1
 ---
 
 These are general-purpose CNI network plugins maintained by the containernetworking team. For more information, see the individual plugin pages.
