@@ -33,7 +33,7 @@ To avoid duplication, we think it is prudent to define a common interface betwee
 - [SR-IOV](https://github.com/hustcat/sriov-cni)
 - [Cilium](https://github.com/cilium/cilium) - BPF & XDP for containers
 - [Infoblox](https://github.com/infobloxopen/cni-infoblox) - enterprise IP address management for containers
-- [Multus](https://github.com/Intel-Corp/multus-cni) - a Multi plugin
+- [Multus](https://github.com/k8snetworkplumbingwg/multus-cni) - a Multi plugin
 - [Romana](https://github.com/romana/kube) - Layer 3 CNI plugin supporting network policy for Kubernetes
 - [CNI-Genie](https://github.com/Huawei-PaaS/CNI-Genie) - generic CNI network plugin
 - [Nuage CNI](https://github.com/nuagenetworks/nuage-cni) - Nuage Networks SDN plugin for network policy kubernetes support 
