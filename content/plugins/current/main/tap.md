@@ -19,7 +19,7 @@ the plugin will use the 'ip' tool to create the tap device when owner/group is n
 {
 	"name": "mynet",
 	"cniVersion": "0.3.1",
-	"type": "vlan",
+	"type": "tap",
 	"mac": "00:11:22:33:44:55",
 	"mtu": 1500,
 	"selinuxcontext": "system_u:system_r:container_t:s0",
@@ -32,7 +32,7 @@ the plugin will use the 'ip' tool to create the tap device when owner/group is n
 ## Network configuration reference
 
 * `name` (string, required): the name of the network
-* `type` (string, required): "vlan"
+* `type` (string, required): "tap"
 * `mac` (string, optional): request a specific MAC address for the interface
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to value chosen by the kernel.
 * `selinuxcontext` (string, optional): for systems with the selinux security module enabled, the context under which to creat the tap device 
