@@ -33,7 +33,7 @@ With win-bridge plugin, all containers (on the same host) are plugged into an L2
     ],
     "HcnPolicyArgs": [
         {
-            "Type": "SDNRoute"
+            "Type": "SDNRoute",
             "Settings": {
                 "DestinationPrefix": "11.0.0.0/8",
                 "NeedEncap": true
