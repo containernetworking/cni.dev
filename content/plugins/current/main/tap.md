@@ -26,7 +26,7 @@ the plugin will use the 'ip' tool to create the tap device when owner/group is n
 	"multiQueue": true,
 	"owner": 0,
 	"group": 0,
-       "bridge": "br1"
+  "bridge": "br1"
 }
 ```
 
