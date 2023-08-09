@@ -47,7 +47,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 }
 ```
 
-## Example L2-only vlan configuration
+## Example L2-only simple vlan configuration (access port)
 ```json
 {
     "cniVersion": "0.3.1",
@@ -55,6 +55,52 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
     "type": "bridge",
     "bridge": "mynet0",
     "vlan": 100,
+    "ipam": {}
+}
+```
+
+## Example L2 trunk configuration (ids 101 and 200 through 299 tagged, default vlan untagged (id 1)) (trunk port)
+```json
+{
+    "cniVersion": "0.3.1",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "vlanTrunk": [
+        { "id": 101 },
+        { "minID": 200, "maxID": 299 }
+    ],
+    "ipam": {}
+}
+```
+## Example L2 trunk configuration (ids 101 and 200 through 299 tagged, no native vlan)
+```json
+{
+    "cniVersion": "0.3.1",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "preserveDefaultVlan": false,
+    "vlanTrunk": [
+        { "id": 101 },
+        { "minID": 200, "maxID": 299 }
+    ],
+    "ipam": {}
+}
+```
+
+## Example L2 trunk configuration with native vlan (id 101 native, 200 through 299 tagged) (trunk port with native vlan)
+```json
+{
+    "cniVersion": "0.3.1",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "preserveDefaultVlan": false,
+    "untaggedIDs": [
+        { "id": 101 }
+    ],
+    "pvid": 101, 
     "vlanTrunk": [
         { "id": 101 },
         { "minID": 200, "maxID": 299 }
@@ -76,13 +122,19 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `hairpinMode` (boolean, optional): set hairpin mode for interfaces on the bridge. Defaults to false.
 * `ipam` (dictionary, required): IPAM configuration to be used for this network. For L2-only network, create empty dictionary.
 * `promiscMode` (boolean, optional): set promiscuous mode on the bridge. Defaults to false.
-* `vlan` (int, optional): assign VLAN tag. Defaults to none.
 * `preserveDefaultVlan` (boolean, optional): indicates whether the default vlan must be preserved on the veth end connected to the bridge. Defaults to true.
-* `vlanTrunk` (list, optional): assign VLAN trunk tag. Defaults to none.
 * `enabledad` (boolean, optional): enables duplicate address detection for the container side veth. Defaults to false.
 * `macspoofchk` (boolean, optional): Enables mac spoof check, limiting the traffic originating from the container to the mac address of the interface. Defaults to false.
 
-*Note:* The VLAN parameter configures the VLAN tag on the host end of the veth and also enables the vlan_filtering feature on the bridge interface.
+### Vlan options
+* `vlan` (int, optional): assign port to a VLAN. Defaults to none. Implies PVID and Untagged (*access port*). Mutually exclusive with the `vlanTrunk` option.
+* `vlanTrunk` (list, optional): assign VLAN trunk tags. Defaults to none. All vlans defined here are tagged on egress and no PVID is assigned by default (*trunk port*). Mutually exclusive with the `vlan` option.
+
+### Trunk options (Only applicable when using `vlanTrunk` option.)
+* `pvid` (int, optional): set vlan as pvid for the trunk.
+* `untaggedIDs` (list, optional): vlan ids that should be sent with no tag on that port on egress.
+
+*Note:* The VLAN parameters configure the VLAN tag(s) on the host end of the veth and also enables the vlan_filtering feature on the bridge interface.
 
 *Note:* To configure uplink for L2 network you need to allow the vlan on the uplink interface by using the following command ``` bridge vlan add vid VLAN_ID dev DEV```.
 
