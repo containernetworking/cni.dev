@@ -27,7 +27,6 @@ add or remove an interface in an already-created network namespace.
 First, install cnitool:
 
 ```bash
-go install github.com/containernetworking/cni@latest
 go install github.com/containernetworking/cni/cnitool@latest
 ```
 
