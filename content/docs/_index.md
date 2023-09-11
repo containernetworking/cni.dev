@@ -18,9 +18,9 @@ To avoid duplication, we think it is prudent to define a common interface betwee
 ### Container runtimes
 
 - [Kubernetes](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) - a system to simplify container operations
-- [HashiCorp Nomad](https://www.nomadproject.io/) - A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale.
-- [Containerd](https://containerd.io/) - A CRI-compliant container runtime
-- [cri-o](https://cri-o.io/) - A lightweight container runtime
+- [HashiCorp Nomad](https://www.nomadproject.io/) - a simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale
+- [Containerd](https://containerd.io/) - a CRI-compliant container runtime
+- [cri-o](https://cri-o.io/) - a lightweight container runtime
 - [OpenShift](https://github.com/openshift/origin/blob/master/docs/openshift_networking_requirements.md) - Kubernetes with additional enterprise features
 - [Cloud Foundry](https://github.com/cloudfoundry-incubator/cf-networking-release) - a platform for cloud applications
 - [Apache Mesos](https://github.com/apache/mesos/blob/master/docs/cni.md) - a distributed systems kernel
