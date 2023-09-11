@@ -25,7 +25,8 @@ the plugin will use the 'ip' tool to create the tap device when owner/group is n
 	"selinuxcontext": "system_u:system_r:container_t:s0",
 	"multiQueue": true,
 	"owner": 0,
-	"group": 0
+	"group": 0,
+  "bridge": "br1"
 }
 ```
 
@@ -39,3 +40,4 @@ the plugin will use the 'ip' tool to create the tap device when owner/group is n
 * `multiQueue` (boolean, optional): enable multiqueue
 * `owner` (integer, optional): user owning the tap device
 * `group` (integer, optional): group owning the tap device
+* `bridge` (string, optional): set the tap device as a port of an already existing bridge
