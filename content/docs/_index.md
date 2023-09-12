@@ -16,7 +16,6 @@ To avoid duplication, we think it is prudent to define a common interface betwee
 ## Who is using CNI?
 
 ### Container runtimes
-
 - [Kubernetes](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) - a system to simplify container operations
 - [HashiCorp Nomad](https://www.nomadproject.io/) - a simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale
 - [Containerd](https://containerd.io/) - a CRI-compliant container runtime
