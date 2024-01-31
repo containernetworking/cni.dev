@@ -63,6 +63,17 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 }
 ```
 
+## Example L2-only, disabled interface configuration
+```json
+{
+    "cniVersion": "0.3.1",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "disableContainerInterface": "true",
+}
+```
+
 ## Network configuration reference
 
 * `name` (string, required): the name of the network.
@@ -81,6 +92,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `vlanTrunk` (list, optional): assign VLAN trunk tag. Defaults to none.
 * `enabledad` (boolean, optional): enables duplicate address detection for the container side veth. Defaults to false.
 * `macspoofchk` (boolean, optional): Enables mac spoof check, limiting the traffic originating from the container to the mac address of the interface. Defaults to false.
+* `disableContainerInterface` (boolean, optional): Set the container interface (veth peer inside the container netns) state down. When enabled, IPAM cannot be used.
 
 *Note:* The VLAN parameter configures the VLAN tag on the host end of the veth and also enables the vlan_filtering feature on the bridge interface.
 
