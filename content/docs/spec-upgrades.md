@@ -7,6 +7,16 @@ toc: true
 weight: 400
 ---
 
+# How to Upgrade to CNI Specification v1.1
+
+CNI v1.1 has the following changes:
+
+- CNI configurations may now contain multiple versions.
+- A new verb, "GC", was added. Runtimes can now request plugins to clean up stale and leaked resources.
+- A new verb, "STATUS", was added. Runtimes can now ask plugins their readiness to accept ADD requests.
+- New fields `mtu`, `socketPath` and `pciID` have been added to `interfaces`.
+- New fields `mtu`, `advmss`, `priority`, `table` and `scope` have been added to `routes`.
+
 # How to Upgrade to CNI Specification v1.0
 
 CNI v1.0 has the following changes:
