@@ -13,6 +13,7 @@ weight: 100
     - [Configuration format](#configuration-format)
       - [Plugin configuration objects:](#plugin-configuration-objects)
       - [Example configuration](#example-configuration)
+    - [Version considerations](#version-considerations)
   - [Section 2: Execution Protocol](#section-2-execution-protocol)
     - [Overview](#overview-1)
     - [Parameters](#parameters)
@@ -21,21 +22,25 @@ weight: 100
       - [`ADD`: Add container to network, or apply modifications](#add-add-container-to-network-or-apply-modifications)
       - [`DEL`: Remove container from network, or un-apply modifications](#del-remove-container-from-network-or-un-apply-modifications)
       - [`CHECK`: Check container's networking is as expected](#check-check-containers-networking-is-as-expected)
+      - [`STATUS`: Check plugin status](#status-check-plugin-status)
       - [`VERSION`: probe plugin version support](#version-probe-plugin-version-support)
+      - [`GC`: Clean up any stale resources](#gc-clean-up-any-stale-resources)
   - [Section 3: Execution of Network Configurations](#section-3-execution-of-network-configurations)
-    - [Lifecycle & Ordering](#lifecycle--ordering)
+    - [Lifecycle \& Ordering](#lifecycle--ordering)
     - [Attachment Parameters](#attachment-parameters)
     - [Adding an attachment](#adding-an-attachment)
     - [Deleting an attachment](#deleting-an-attachment)
     - [Checking an attachment](#checking-an-attachment)
-    - [Deriving execution configuration from plugin configuration](#deriving-execution-configuration-from-plugin-configuration)
+    - [Garbage-collecting a network](#garbage-collecting-a-network)
+    - [Deriving request configuration from plugin configuration](#deriving-request-configuration-from-plugin-configuration)
       - [Deriving `runtimeConfig`](#deriving-runtimeconfig)
   - [Section 4: Plugin Delegation](#section-4-plugin-delegation)
     - [Delegated Plugin protocol](#delegated-plugin-protocol)
     - [Delegated plugin execution procedure](#delegated-plugin-execution-procedure)
   - [Section 5: Result Types](#section-5-result-types)
-    - [Success](#success)
+    - [ADD Success](#add-success)
       - [Delegated plugins (IPAM)](#delegated-plugins-ipam)
+    - [VERSION Success](#version-success)
     - [Error](#error)
     - [Version](#version-1)
   - [Appendix: Examples](#appendix-examples)
@@ -45,7 +50,7 @@ weight: 100
 
 ## Version
 
-This is CNI **spec** version **1.0.0**.
+This is CNI **spec** version **1.1.0**.
 
 Note that this is **independent from the version of the CNI library and plugins** in this repository (e.g. the versions of [releases](https://github.com/containernetworking/cni/releases)).
 
@@ -107,20 +112,24 @@ require this.
 
 A network configuration consists of a JSON object with the following keys:
 
-- `cniVersion` (string): [Semantic Version 2.0](https://semver.org) of CNI specification to which this configuration list and all the individual configurations conform. Currently "1.0.0"
-- `name` (string): Network name. This should be unique across all network configurations on a host (or other administrative domain).  Must start with an alphanumeric character, optionally followed by any combination of one or more alphanumeric characters, underscore (_), dot (.) or hyphen (-).
+- `cniVersion` (string): [Semantic Version 2.0](https://semver.org) of CNI specification to which this configuration list and all the individual configurations conform. Currently "1.1.0"
+- `cniVersions` (string list): List of all CNI versions which this configuration supports. See [version selection](#version-selection) below.
+- `name` (string): Network name. This should be unique across all network configurations on a host (or other administrative domain).  Must start with an alphanumeric character, optionally followed by any combination of one or more alphanumeric characters, underscore, dot (.) or hyphen (-). Must not contain characters disallowed in file paths.
 - `disableCheck` (boolean): Either `true` or `false`.  If `disableCheck` is `true`, runtimes must not call `CHECK` for this network configuration list.  This allows an administrator to prevent `CHECK`ing where a combination of plugins is known to return spurious errors.
-- `plugins` (list): A list of CNI plugins and their configuration, which is a list of plugin configuration objects.
+- `disableGC` (boolean): Either `true` or `false`.  If `disableGC` is `true`, runtimes must not call `GC` for this network configuration list.  This allows an administrator to prevent `GC`ing when it is known that garbage collection may have undesired effects (e.g. shared configuration between multiple runtimes).
+- `loadOnlyInlinedPlugins` (boolean): Either `true` or `false`. If `false` (default), indicates [plugin configuration objects](#plugin-configuration-objects) can be aggregated from multiple sources. Any valid plugin configuration objects aggregated from other sources must be appended to the final list of `plugins` for that network name. If set to `true`, indicates that valid plugin configuration objects aggregated from sources other than the main network configuration will be ignored. If `plugins` is not present in the network configuration, `loadOnlyInlinedPlugins` cannot be set to `true`.
+- `plugins` (list): A list of inlined [plugin configuration objects](#plugin-configuration-objects). If this key is populated with inlined plugin objects, and `loadOnlyInlinedPlugins` is true, the final set of plugins for a network must consist of all the plugin objects in this list, merged with all the plugins loaded from the sibling folder with the same name as the network.
 
 #### Plugin configuration objects:
-Plugin configuration objects may contain additional fields than the ones defined here.
-The runtime MUST pass through these fields, unchanged, to the plugin, as defined in section 3.
+Runtimes may aggregate plugin configuration objects from multiple sources, and must unambiguously associate each loaded plugin configuration object with a single, valid network configuration. All aggregated plugin configuration objects must be validated, and each plugin with a valid configuration object must be invoked.
+
+Plugin configuration objects may contain additional fields beyond the ones defined here. The runtime MUST pass through these fields, unchanged, to the invoked plugin, as defined in section 3.
 
 **Required keys:**
 - `type` (string): Matches the name of the CNI plugin binary on disk. Must not contain characters disallowed in file paths for the system (e.g. / or \\).
 
 **Optional keys, used by the protocol:**
-- `capabilities` (dictionary): Defined in [section 3](#deriving-runtimeconfig)
+- `capabilities` (dictionary): Defined in [section 3](#Deriving-runtimeConfig)
 
 **Reserved keys, used by the protocol:**
 These keys are generated by the runtime at execution time, and thus should not be used in configuration.
@@ -145,9 +154,11 @@ Plugins that consume any of these configuration keys should respect their intend
 Plugins may define additional fields that they accept and may generate an error if called with unknown fields. Runtimes must preserve unknown fields in plugin configuration objects when transforming for execution.
 
 #### Example configuration
+The following is an example JSON representation of a network configuration `dbnet` with three plugin configurations (`bridge`, `tuning`, and `portmap`).
 ```jsonc
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
+  "cniVersions": ["0.3.1", "0.4.0", "1.0.0", "1.1.0"],
   "name": "dbnet",
   "plugins": [
     {
@@ -155,7 +166,7 @@ Plugins may define additional fields that they accept and may generate an error 
       // plugin specific parameters
       "bridge": "cni0",
       "keyA": ["some more", "plugin specific", "configuration"],
-      
+
       "ipam": {
         "type": "host-local",
         // ipam specific
@@ -186,6 +197,15 @@ Plugins may define additional fields that they accept and may generate an error 
 }
 ```
 
+### Version considerations
+
+CNI runtimes, plugins, and network configurations may support multiple CNI specification versions independently. Plugins indicate their set of supported versions through the VERSION command, while network configurations indicate their set of supported versions through the `cniVersion` and `cniVersions` fields.
+
+CNI runtimes MUST select the highest supported version from the set of network configuration versions given by the `cniVersion` and `cniVersions` fields. Runtimes MAY consider the set of supported plugin versions as reported by the VERSION command when determining available versions.
+
+
+The CNI protocol follows Semantic Versioning principles, so the configuration format MUST remain backwards and forwards compatible within major versions.
+
 ## Section 2: Execution Protocol
 
 ### Overview
@@ -197,7 +217,7 @@ A CNI plugin is responsible for configuring a container's network interface in s
 * "Chained" plugins, which adjust the configuration of an already-created interface (but may need to create more interfaces to do so).
 
 The runtime passes parameters to the plugin via environment variables and configuration. It supplies configuration via stdin. The plugin returns
-a [result](#section-5-result-types) on stdout on success, or an error on stderr if the operation fails. Configuration and results are encoded in JSON.
+a [result](#Section-5-Result-Types) on stdout on success, or an error on stderr if the operation fails. Configuration and results are encoded in JSON.
 
 Parameters define invocation-specific settings, whereas configuration is, with some exceptions, the same for any given network.
 
@@ -207,19 +227,19 @@ The runtime must execute the plugin in the runtime's networking domain. (For mos
 
 Protocol parameters are passed to the plugins via OS environment variables.
 
-- `CNI_COMMAND`: indicates the desired operation; `ADD`, `DEL`, `CHECK`, or `VERSION`.
-- `CNI_CONTAINERID`: Container ID. A unique plaintext identifier for a container, allocated by the runtime. Must not be empty.  Must start with an alphanumeric character, optionally followed by any combination of one or more alphanumeric characters, underscore (_), dot (.) or hyphen (-).
+- `CNI_COMMAND`: indicates the desired operation; `ADD`, `DEL`, `CHECK`, `GC`, or `VERSION`.
+- `CNI_CONTAINERID`: Container ID. A unique plaintext identifier for a container, allocated by the runtime. Must not be empty.  Must start with an alphanumeric character, optionally followed by any combination of one or more alphanumeric characters, underscore (), dot (.) or hyphen (-).
 - `CNI_NETNS`: A reference to the container's "isolation domain". If using network namespaces, then a path to the network namespace (e.g. `/run/netns/[nsname]`)
 - `CNI_IFNAME`: Name of the interface to create inside the container; if the plugin is unable to use this interface name it must return an error.
 - `CNI_ARGS`: Extra arguments passed in by the user at invocation time. Alphanumeric key-value pairs separated by semicolons; for example, "FOO=BAR;ABC=123"
 - `CNI_PATH`: List of paths to search for CNI plugin executables. Paths are separated by an OS-specific list separator; for example ':' on Linux and ';' on Windows
 
 ### Errors
-A plugin must exit with a return code of 0 on success, and non-zero on failure. If the plugin encounters an error, it should output an ["error" result structure](#error) (see below).
+A plugin must exit with a return code of 0 on success, and non-zero on failure. If the plugin encounters an error, it should output an ["error" result structure](#Error) (see below).
 
 ### CNI operations
 
-CNI defines 4 operations: `ADD`, `DEL`, `CHECK`, and `VERSION`. These are passed to the plugin via the `CNI_COMMAND` environment variable.
+CNI defines 5 operations: `ADD`, `DEL`, `CHECK`, `GC`, and `VERSION`. These are passed to the plugin via the `CNI_COMMAND` environment variable.
 
 #### `ADD`: Add container to network, or apply modifications
 
@@ -227,7 +247,7 @@ A CNI plugin, upon receiving an `ADD` command, should either
 - create the interface defined by `CNI_IFNAME` inside the container at `CNI_NETNS`, or
 - adjust the configuration of the interface defined by `CNI_IFNAME` inside the container at `CNI_NETNS`.
 
-If the CNI plugin is successful, it must output a [result structure](#success) (see below) on standard out. If the plugin was supplied a `prevResult` as part of its input configuration, it MUST handle `prevResult` by either passing it through, or modifying it appropriately.
+If the CNI plugin is successful, it must output a [result structure](#Success) (see below) on standard out. If the plugin was supplied a `prevResult` as part of its input configuration, it MUST handle `prevResult` by either passing it through, or modifying it appropriately.
 
 If an interface of the requested name already exists in the container, the CNI plugin MUST return with an error.
 
@@ -315,6 +335,32 @@ Optional environment parameters:
 
 All parameters, with the exception of `CNI_PATH`, must be the same as the corresponding `ADD` for this container.
 
+
+#### `STATUS`: Check plugin status
+`STATUS` is a way for a runtime to determine the readiness of a network plugin.
+
+A plugin must exit with a zero (success) return code if the plugin is ready to service ADD requests. If the plugin knows that it is not able to service ADD requests, it must exit with a non-zero return code and output an error on standard out (see below).
+
+For example, if a plugin relies on an external service or daemon, it should return an error to `STATUS` if that service is unavailable. Likewise, if a plugin has a limited number of resources (e.g. IP addresses, hardware queues), it should return an error if those resources are exhausted and no new `ADD` requests can be serviced.
+
+The following error codes are defined in the context of `STATUS`:
+
+- 50: The plugin is not available (i.e. cannot service `ADD` requests)
+- 51: The plugin is not available, and existing containers in the network may have limited connectivity.
+
+Plugin considerations:
+- Status is purely informational. A plugin MUST NOT rely on `STATUS` being called.
+- Plugins should always expect other CNI operations (like `ADD`, `DEL`, etc) even if `STATUS` returns an error. `STATUS` does not prevent other runtime requests.
+- If a plugin relies on a delegated plugin (e.g. IPAM) to service `ADD` requests, it must also execute a `STATUS` request to that plugin when it receives a `STATUS` request for itself. If the delegated plugin return an error result, the executing plugin should return an error result.
+
+**Input:**
+
+The runtime will provide a json-serialized plugin configuration object (defined below) on standard in.
+
+Optional environment parameters:
+- `CNI_PATH`
+
+
 #### `VERSION`: probe plugin version support
 The plugin should output via standard-out a json-serialized version result object (see below).
 
@@ -325,6 +371,38 @@ A json-serialized object, with the following key:
 
 Required environment parameters:
 - `CNI_COMMAND`
+
+#### `GC`: Clean up any stale resources
+
+The GC command provides a way for runtimes to specify the expected set of attachments to a network.
+The network plugin may then remove any resources related to attachments that do not exist in this set.
+
+Resources may, for example, include:
+- IPAM reservations
+- Firewall rules
+
+A plugin SHOULD remove as many stale resources as possible. For example, a plugin should remove any IPAM reservations associated with attachments not in the provided list. The plugin MAY assume that the isolation domain (e.g. network namespace) has been deleted, and thus any resources (e.g. network interfaces) therein have been removed.
+
+Plugins should generally complete a `GC` action without error. If an error is encountered, a plugin should continue; removing as many resources as possible, and report the errors back to the runtime.
+
+Plugins MUST, additionally, forward any GC calls to delegated plugins they are configured to use (see section 4).
+
+The runtime MUST NOT use GC as a substitute for DEL. Plugins may be unable to clean up some resources from GC that they would have been able to clean up from DEL.
+
+**Input:**
+
+The runtime must provide a JSON-serialized plugin configuration object (defined below) on standard in. It contains an additional key;
+
+- `cni.dev/valid-attachments` (array of objects): The list of **still valid** attachments to this network:
+    - `containerID` (string): the value of CNI_CONTAINERID as provided during the CNI ADD operation
+    - `ifname` (string): the value of CNI_IFNAME as provided during the CNI ADD operation
+
+Required environment parameters:
+- `CNI_COMMAND`
+- `CNI_PATH`
+
+**Output:**
+No output on success, ["error" result structure](#Error) on error.
 
 
 ## Section 3: Execution of Network Configurations
@@ -337,16 +415,18 @@ The operation of a network configuration on a container is called an _attachment
 
 - The container runtime must create a new network namespace for the container before invoking any plugins.
 - The container runtime must not invoke parallel operations for the same container, but is allowed to invoke parallel operations for different containers. This includes across multiple attachments.
+  - **Exception**: The runtime must exclusively execute either _gc_ or _add_ and _delete_. The runtime must ensure that no _add_ or _delete_ operations are in progress before executing _gc_, and must wait for _gc_ to complete before issuing new _add_ or _delete_ commands.
 - Plugins must handle being executed concurrently across different containers. If necessary, they must implement locking on shared resources (e.g. IPAM databases).
 - The container runtime must ensure that _add_ is eventually followed by a corresponding _delete_. The only exception is in the event of catastrophic failure, such as node loss. A _delete_ must still be executed even if the _add_ fails.
 - _delete_ may be followed by additional _deletes_.
 - The network configuration should not change between _add_ and _delete_.
 - The network configuration should not change between _attachments_.
+- The container runtime is responsible for cleanup of the container's network namespace.
 
 ### Attachment Parameters
 While a network configuration should not change between _attachments_, there are certain parameters supplied by the container runtime that are per-attachment. They are:
 
-- **Container ID:** A unique plaintext identifier for a container, allocated by the runtime. Must not be empty.  Must start with an alphanumeric character, optionally followed by any combination of one or more alphanumeric characters, underscore (_), dot (.) or hyphen (-). During execution, always set as the  `CNI_CONTAINERID` parameter.
+- **Container ID:** A unique plaintext identifier for a container, allocated by the runtime. Must not be empty.  Must start with an alphanumeric character, optionally followed by any combination of one or more alphanumeric characters, underscore (), dot (.) or hyphen (-). During execution, always set as the  `CNI_CONTAINERID` parameter.
 - **Namespace**: A reference to the container's "isolation domain". If using network namespaces, then a path to the network namespace (e.g. `/run/netns/[nsname]`). During execution, always set as the `CNI_NETNS` parameter.
 - **Container interface name**: Name of the interface to create inside the container. During execution, always set as the `CNI_IFNAME` parameter.
 - **Generic Arguments**: Extra arguments, in the form of key-value string pairs, that are relevant to a specific attachment.  During execution, always set as the `CNI_ARGS` parameter.
@@ -393,21 +473,38 @@ For every plugin defined in the `plugins` key of the network configuration,
 
 If all plugins return success, return success to the caller.
 
-### Deriving execution configuration from plugin configuration
+### Garbage-collecting a network
+The runtime may also ask every plugin in a network configuration to clean up any stale resources via the _GC_ command.
+
+When garbage-collecting a configuration, there are no [Attachment Parameters](#attachment-parameters).
+
+For every plugin defined in the `plugins` key of the network configuration,
+1. Look up the executable specified in the `type` field. If this does not exist, then this is an error.
+2. Derive request configuration from the plugin configuration.
+3. Execute the plugin binary, with `CNI_COMMAND=GC`. Supply the derived configuration via standard in.
+4. If the plugin returns an error, **continue** with execution, returning all errors to the caller.
+
+If all plugins return success, return success to the caller.
+
+### Deriving request configuration from plugin configuration
 The network configuration format (which is a list of plugin configurations to execute) must be transformed to a format understood by the plugin (which is a single plugin configuration). This section describes that transformation.
 
-The execution configuration for a single plugin invocation is also JSON. It consists of the plugin configuration, primarily unchanged except for the specified additions and removals.
+The request configuration for a single plugin invocation is also JSON. It consists of the plugin configuration, primarily unchanged except for the specified additions and removals.
 
-The following fields must be inserted into the execution configuration by the runtime:
-- `cniVersion`: taken from the `cniVersion` field of the network configuration
+The following fields are always to be inserted into the request configuration by the runtime:
+- `cniVersion`: the protocol version selected by the runtime - the string "1.1.0"
 - `name`: taken from the `name` field of the network configuration
-- `runtimeConfig`: A JSON object, consisting of the union of capabilities provided by the plugin and requested by the runtime (more details below)
-- `prevResult`: A JSON object, consisting of the result type returned by the "previous" plugin. The meaning of "previous" is defined by the specific operation (_add_, _delete_, or _check_).
 
-The following fields must be **removed** by the runtime:
-- `capabilities`
 
-All other fields should be passed through unaltered.
+For attachment-specific operations (ADD, DEL, CHECK), additional field requirements apply:
+- `runtimeConfig`: the runtime must insert an object consisting of the union of capabilities provided by the plugin and requested by the runtime (more details below). 
+- `prevResult`: the runtime must insert consisting of the result type returned by the "previous" plugin. The meaning of "previous" is defined by the specific operation (_add_, _delete_, or _check_). This field must not be set for the first _add_ in a chain.
+- `capabilities`: must not be set
+
+For GC operations:
+- `cni.dev/valid-attachments`: as specified in section 2.
+
+All other fields not prefixed with `cni.dev/` should be passed through unaltered.
 
 #### Deriving `runtimeConfig`
 
@@ -463,29 +560,26 @@ When a plugin executes a delegated plugin, it should:
 - Execute that plugin with the same environment and configuration that it received.
 - Ensure that the delegated plugin's stderr is output to the calling plugin's stderr.
 
-If a plugin is executed with `CNI_COMMAND=CHECK` or `DEL`, it must also execute any delegated plugins. If any of the delegated plugins return error, error should be returned by the upper plugin.
+If a plugin is executed with `CNI_COMMAND=CHECK`, `DEL`, or `GC`, it must also execute any delegated plugins. If any of the delegated plugins return error, error should be returned by the upper plugin.
 
 If, on `ADD`, a delegated plugin fails, the "upper" plugin should execute again with `DEL` before returning failure.
 
 ## Section 5: Result Types
 
-Plugins can return one of three result types:
+For certain operations, plugins must output result information. The output should be serialized as JSON on standard out.
 
-- _Success_ (or _Abbreviated Success_)
-- _Error_
-- _Version
-
-### Success
-
-Plugins provided a `prevResult` key as part of their request configuration must output it as their result, with any possible modifications made by that plugin included. If a plugin makes no changes that would be reflected in the _Success result_ type, then it must output a result equivalent to the provided `prevResult`.
+### ADD Success
 
 Plugins must output a JSON object with the following keys upon a successful `ADD` operation:
 
-- `cniVersion`: The same version supplied on input - the string "1.0.0"
+- `cniVersion`: The same version supplied on input - the string "1.1.0"
 - `interfaces`: An array of all interfaces created by the attachment, including any host-level interfaces:
-    - `name`: The name of the interface.
-    - `mac`: The hardware address of the interface (if applicable).
-    - `sandbox`: The isolation domain reference (e.g. path to network namespace) for the interface, or empty if on the host. For interfaces created inside the container, this should be the value passed via `CNI_NETNS`.
+    - `name` (string): The name of the interface.
+    - `mac` (string): The hardware address of the interface (if applicable).
+    - `mtu`: (uint) The MTU of the interface (if applicable).
+    - `sandbox` (string): The isolation domain reference (e.g. path to network namespace) for the interface, or empty if on the host. For interfaces created inside the container, this should be the value passed via `CNI_NETNS`.
+    - `socketPath` (string, optional): An absolute path to a socket file corresponding to this interface, if applicable.
+    - `pciID` (string, optional): The platform-specific identifier of the PCI device corresponding to this interface, if applicable.
 - `ips`: IPs assigned by this attachment. Plugins may include IPs assigned external to the container.
     - `address` (string): an IP address in CIDR notation (eg "192.168.1.3/24").
     - `gateway` (string): the default gateway for this subnet, if one exists.
@@ -493,11 +587,18 @@ Plugins must output a JSON object with the following keys upon a successful `ADD
 - `routes`: Routes created by this attachment:
     - `dst`: The destination of the route, in CIDR notation
     - `gw`: The next hop address. If unset, a value in `gateway` in the `ips` array may be used.
+    - `mtu` (uint): The MTU (Maximum transmission unit) along the path to the destination.
+    - `advmss` (uint): The MSS (Maximal Segment Size) to advertise to these destinations when establishing TCP connections.
+    - `priority` (uint): The priority of route, lower is higher.
+    - `table` (uint): The table to add the route to.
+    - `scope` (uint): The scope of the destinations covered by the route prefix (global (0), link (253), host (254)).
 - `dns`: a dictionary consisting of DNS configuration information
     - `nameservers` (list of strings): list of a priority-ordered list of DNS nameservers that this network is aware of. Each entry in the list is a string containing either an IPv4 or an IPv6 address.
     - `domain` (string): the local domain used for short hostname lookups.
     - `search` (list of strings): list of priority ordered search domains for short hostname lookups. Will be preferred over `domain` by most resolvers.
     - `options` (list of strings): list of options that can be passed to the resolver.
+
+Plugins provided a `prevResult` key as part of their request configuration must output it as their result, with any possible modifications made by that plugin included. If a plugin makes no changes that would be reflected in the _Success result_ type, then it must output a result equivalent to the provided `prevResult`.
 
 #### Delegated plugins (IPAM)
 Delegated plugins may omit irrelevant sections.
@@ -505,11 +606,26 @@ Delegated plugins may omit irrelevant sections.
 Delegated IPAM plugins must return an abbreviated _Success_ object. Specifically, it is missing the `interfaces` array, as well as the `interface` entry in `ips`.
 
 
+### VERSION Success
+
+Plugins must output a JSON object with the following keys upon a `VERSION` operation:
+
+- `cniVersion`: The value of `cniVersion` specified on input
+- `supportedVersions`: A list of supported specification versions
+
+Example:
+```json
+{
+    "cniVersion": "1.0.0",
+    "supportedVersions": [ "0.1.0", "0.2.0", "0.3.0", "0.3.1", "0.4.0", "1.0.0" ]
+}
+```
+
 ### Error
 
 Plugins should output a JSON object with the following keys if they encounter an error:
 
-- `cniVersion`: The same value as provided by the configuration
+- `cniVersion`: The protocol version in use - "1.1.0"
 - `code`: A numeric error code, see below for reserved codes.
 - `msg`: A short message characterizing the error.
 - `details`: A longer message describing the error.
@@ -518,7 +634,7 @@ Example:
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "code": 7,
   "msg": "Invalid Configuration",
   "details": "Network 192.168.0.0/31 too small to allocate from."
@@ -526,7 +642,6 @@ Example:
 ```
 
 Error codes 0-99 are reserved for well-known errors. Values of 100+ can be freely used for plugin specific errors.
-
 
 Error Code|Error Description
 ---|---
@@ -551,14 +666,14 @@ Plugins must output a JSON object with the following keys upon a `VERSION` opera
 Example:
 ```json
 {
-    "cniVersion": "1.0.0",
-    "supportedVersions": [ "0.1.0", "0.2.0", "0.3.0", "0.3.1", "0.4.0", "1.0.0" ]
+    "cniVersion": "1.1.0",
+    "supportedVersions": [ "0.1.0", "0.2.0", "0.3.0", "0.3.1", "0.4.0", "1.0.0", "1.1.0" ]
 }
 ```
 
 
 ## Appendix: Examples
-We assume the network configuration [shown above](#example-configuration) in section 1. For this attachment, the runtime produces `portmap` and `mac` capability args, along with the generic argument "argA=foo".
+We assume the network configuration [shown above](#Example-configuration) in section 1. For this attachment, the runtime produces `portmap` and `mac` capability args, along with the generic argument "argA=foo".
 The examples uses `CNI_IFNAME=eth0`.
 
 ### Add example
@@ -570,7 +685,7 @@ The container runtime would perform the following steps for the `add` operation.
 
 ```json
 {
-    "cniVersion": "1.0.0",
+    "cniVersion": "1.1.0",
     "name": "dbnet",
     "type": "bridge",
     "bridge": "cni0",
@@ -650,7 +765,7 @@ The bridge plugin returns the following result, configuring the interface accord
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "name": "dbnet",
   "type": "tuning",
   "sysctl": {
@@ -735,7 +850,7 @@ The plugin returns the following result. Note that the **mac** has changed.
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "name": "dbnet",
   "type": "portmap",
   "runtimeConfig": {
@@ -789,7 +904,7 @@ Given the previous _Add_, the container runtime would perform the following step
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "name": "dbnet",
   "type": "bridge",
   "bridge": "cni0",
@@ -845,7 +960,7 @@ Assuming the `bridge` plugin is satisfied, it produces no output on standard out
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "name": "dbnet",
   "type": "tuning",
   "sysctl": {
@@ -895,7 +1010,7 @@ Likewise, the `tuning` plugin exits indicating success.
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "name": "dbnet",
   "type": "portmap",
   "runtimeConfig": {
@@ -948,7 +1063,7 @@ Note that plugins are executed in reverse order from the _Add_ and _Check_ actio
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "name": "dbnet",
   "type": "portmap",
   "runtimeConfig": {
@@ -996,7 +1111,7 @@ Note that plugins are executed in reverse order from the _Add_ and _Check_ actio
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "name": "dbnet",
   "type": "tuning",
   "sysctl": {
@@ -1044,7 +1159,7 @@ Note that plugins are executed in reverse order from the _Add_ and _Check_ actio
 
 ```json
 {
-  "cniVersion": "1.0.0",
+  "cniVersion": "1.1.0",
   "name": "dbnet",
   "type": "bridge",
   "bridge": "cni0",
