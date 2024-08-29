@@ -83,6 +83,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `isDefaultGateway` (boolean, optional): Sets isGateway to true and makes the assigned IP the default route. Defaults to false.
 * `forceAddress` (boolean, optional): Indicates if a new IP address should be set if the previous value has been changed. Defaults to false.
 * `ipMasq` (boolean, optional): set up IP Masquerade on the host for traffic originating from this network and destined outside of it. Defaults to false.
+* `ipMasqBackend` (string, optional): IP masquerading implementation to use when `ipMasq` is true. Can be "iptables" or "nftables". Defaults to "iptables", unless only "nftables" is available.
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to the value chosen by the kernel.
 * `hairpinMode` (boolean, optional): set hairpin mode for interfaces on the bridge. Defaults to false.
 * `ipam` (dictionary, required): IPAM configuration to be used for this network. For L2-only network, create empty dictionary.
