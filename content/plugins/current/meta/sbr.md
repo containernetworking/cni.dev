@@ -94,13 +94,22 @@ On deletion it:
 - does nothing with routes (since the kernel automatically removes routes when
   the device with which they are associated is deleted).
 
+### Table ID option
+
+When the table ID option is set, the behavior is different from the one explained above.
+The only action made by the SBR chained plugin is to create the rules with the table ID 
+set as parameter and with the IPs of the interface created by the previous plugin. Routes 
+are not moved and remain unchanged.
+
+On the deletion, the SBR chained plugin gets the IPs of the interface about to be deleted and 
+deletes the rules by finding them using the IPs and the table ID passed as parameter.
+
 ## Future enhancements and known limitations
 
 The following are possible future enhancements.
 
 - The table number is currently selected by starting at 100, then incrementing
-  the value until an unused table number is found. It might be nice to have an
-  option to pass the table number as an input.
+  the value until an unused table number is found.
 
 - There is no log severity, and there is no logging to file (pending changes to
   CNI logging generally).
