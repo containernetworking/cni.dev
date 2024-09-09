@@ -11,9 +11,9 @@ weight: 200
 
 This plugin provides a way to use and configure Linux's Traffic control (tc) subsystem. tc encompasses the sets of mechanisms and operations by which packets are queued for transmission/reception on a network interface.
 
-This plugin configures a token bucket filter (tbf) queuing discipline (qdisc) on both ingress and egress traffic. Resulting in traffic being shaped when reading / writing.
+This plugin configures a hierarchy token bucket (htb) queuing discipline (qdisc) on both ingress and egress traffic. Resulting in traffic being shaped when reading / writing, with the possibility to limit the scope to some specified subnets or, on the contrary exclude them from traffic shaping.
 
-Due to limitations on tc shaping rules for ingress, this plugin creates an Intermediate Functional Block device (ifb) to redirect packets from the host interface. tc tbf is then applied to the ifb device. The packets that were redirected to the ifb devices, are written OUT (and shaped) to the host interface.
+Due to limitations on tc shaping rules for ingress, this plugin creates an Intermediate Functional Block device (ifb) to redirect packets from the host interface. tc htb is then applied to the ifb device. The packets that were redirected to the ifb devices, are written OUT (and shaped) to the host interface.
 
 This plugin is only useful when used in addition to other plugins.
 
@@ -46,26 +46,29 @@ The following is an example [json configuration list](https://github.com/contain
       "ingressRate": 123,
       "ingressBurst": 456,
       "egressRate": 123,
-      "egressBurst": 456
+      "egressBurst": 456,
+      "shapedSubnets": ["192.168.0.0/16", "fd00::/7"]
     }
   ]
 }
 ```
 
-The result is an `ifb` device in the host namespace redirecting to the `host-interface`, with `tc tbf` applied on the `ifb` device and the `container-interface`
+The result is an `ifb` device in the host namespace redirecting to the `host-interface`, with `tc htb` applied on the `ifb` device and the `container-interface`, but only when source ip (for ingress) or destination ip (for egress) lies within the specified and optional shapedSubnets CIDRs.
 
 ## Network configuration reference
-* ingressRate: is the rate in bps at which traffic can enter an interface. (See http://man7.org/linux/man-pages/man8/tbf.8.html)
-* ingressBurst: is the maximum amount in bits that tokens can be made available for instantaneously. (See http://man7.org/linux/man-pages/man8/tbf.8.html)
-* egressRate: is the rate in bps at which traffic can leave an interface. (See http://man7.org/linux/man-pages/man8/tbf.8.html)
-* egressBurst: is the maximum amount in bits that tokens can be made available for instantaneously. (See http://man7.org/linux/man-pages/man8/tbf.8.html)
+* ingressRate: is the rate in bps at which traffic can enter an interface. (See https://man7.org/linux/man-pages/man8/tc-htb.8.html)
+* ingressBurst: is the maximum amount in bits that tokens can be made available for instantaneously. (See https://man7.org/linux/man-pages/man8/tc-htb.8.html)
+* egressRate: is the rate in bps at which traffic can leave an interface. (See https://man7.org/linux/man-pages/man8/tc-htb.8.html)
+* egressBurst: is the maximum amount in bits that tokens can be made available for instantaneously. (See https://man7.org/linux/man-pages/man8/tc-htb.8.html)
+* shapedSubnets: is a list of ipv4/ipv6 subnets to be included in traffic shaping.
+* unshapedSubnets: is a list of ipv4/ipv6 subnets to be excluded from traffic shaping.
 
 Both ingressRate and ingressBurst must be set in order to limit ingress bandwidth. If neither one is set, then ingress bandwidth is not limited.
 Both egressRate and egressBurst must be set in order to limit egress bandwidth. If neither one is set, then egress bandwidth is not limited.
+Parameters unshapedSubnets and shapedSubnets parameters are optional and mutually exclusive.
 
-
-## tc tbf documentation
+## tc htb documentation
 
 - [tldp traffic control](http://tldp.org/HOWTO/Traffic-Control-HOWTO/components.html)
-- [man tbf](http://man7.org/linux/man-pages/man8/tbf.8.html)
+- [man htb](https://man7.org/linux/man-pages/man8/tc-htb.8.html)
 - [tc ingress and ifb mirroring](https://serverfault.com/questions/350023/tc-ingress-policing-and-ifb-mirroring)
