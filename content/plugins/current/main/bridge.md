@@ -47,22 +47,6 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 }
 ```
 
-## Example L2-only vlan configuration
-```json
-{
-    "cniVersion": "0.3.1",
-    "name": "mynet",
-    "type": "bridge",
-    "bridge": "mynet0",
-    "vlan": 100,
-    "vlanTrunk": [
-        { "id": 101 },
-        { "minID": 200, "maxID": 299 }
-    ],
-    "ipam": {}
-}
-```
-
 ## Example L2-only, disabled interface configuration
 ```json
 {
@@ -94,9 +78,44 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `macspoofchk` (boolean, optional): Enables mac spoof check, limiting the traffic originating from the container to the mac address of the interface. Defaults to false.
 * `disableContainerInterface` (boolean, optional): Set the container interface (veth peer inside the container netns) state down. When enabled, IPAM cannot be used.
 
-*Note:* The VLAN parameter configures the VLAN tag on the host end of the veth and also enables the vlan_filtering feature on the bridge interface.
+## VLAN capabilities
 
-*Note:* To configure uplink for L2 network you need to allow the vlan on the uplink interface by using the following command ``` bridge vlan add vid VLAN_ID dev DEV```.
+The `vlan` and `vlanTrunk` parameters are mutually exclusive.
+
+The `vlan` parameter configures the VLAN tag on the host end of the veth and also enables the vlan_filtering feature on the bridge interface. The VLAN_DEFAULT_PVID of the bridge (when set), is added by default on the port as a VID untagged on egress. This is in most cases not desirable. Use the `preserveDefaultVlan` parameter to remove it.
+
+The `vlanTrunk` parameter allows to add a single VID or a range of VIDs (see example below). The native vlan of the trunk is the VLAN_DEFAULT_PVID of the bridge. This VID is added by default on the port with PVID and UNTAGGED options enabled. There are two known limitations due to this. First, all trunk ports on the bridge have the same native vlan. Second, the default PVID of the bridge is currently not configurable.
+
+To configure uplink for L2 network you need to allow the vlan on the uplink interface by using the following command ``` bridge vlan add vid VLAN_ID dev DEV```.
+
+
+### Example L2-only vlan configuration
+```json
+{
+    "cniVersion": "0.3.1",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "vlan": 100,
+    "preserveDefaultVlan": false,
+    "ipam": {}
+}
+```
+
+### Example L2-only vlan trunk configuration
+```json
+{
+    "cniVersion": "0.3.1",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "vlanTrunk": [
+      { "id": 101 },
+      { "minID": 200, "maxID": 299 }],
+    "ipam": {}
+}
+```
+
 
 ## Interface configuration arguments reference
 
