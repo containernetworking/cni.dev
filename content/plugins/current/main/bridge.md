@@ -70,7 +70,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
-    "disableContainerInterface": "true",
+    "disableContainerInterface": true
 }
 ```
 
