@@ -54,6 +54,8 @@ To avoid duplication, we think it is prudent to define a common interface betwee
 - [Kube-OVN](https://github.com/alauda/kube-ovn) - a CNI plugin that bases on OVN/OVS and provides advanced features like subnet, static ip, ACL, QoS, etc.
 - [Project Antrea](https://github.com/vmware-tanzu/antrea) - an Open vSwitch Kubernetes CNI
 - [OVN4NFV-K8S-Plugin](https://github.com/opnfv/ovn4nfv-k8s-plugin) - a OVN based CNI controller plugin to provide cloud native based Service function chaining (SFC), Multiple OVN overlay networking
+- [Nomad CNI](https://forge.puppet.com/modules/maxadamo/nomad_cni/readme) - leverages the configuration of the CNI on Nomad through Puppet
+- [Netreap](https://github.com/cosmonic-labs/netreap) - Netreap is a non-Kubernetes-based tool for handling Cilium on a Nomad Cluster
 
 The CNI team also maintains some [core plugins in a separate repository](https://github.com/containernetworking/plugins).
 
