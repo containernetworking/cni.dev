@@ -165,7 +165,7 @@ Starting with v1.1.0, the `firewall` plugin supports `ingressPolicy` for isolati
 }
 ```
 
-The supported values are `open` and `same-bridge`.
+The supported values are `open` and `same-bridge` and (starting with v1.7) `isolated`.
 
 - `open` is the default and does NOP.
 
@@ -173,29 +173,47 @@ The supported values are `open` and `same-bridge`.
 that are similar to Docker libnetwork's "DOCKER-ISOLATION-STAGE-1" and
 "DOCKER-ISOLATION-STAGE-2" rules.
 
-e.g., when `ns1` and `ns2` are connected to bridge `cni1`, and `ns3` is
-connected to bridge `cni2`, the `same-bridge` ingress policy disallows
-communications between `ns1` and `ns3`, while allowing communications
-between `ns1` and `ns2`.
+    e.g., when `ns1` and `ns2` are connected to bridge `cni1`, and `ns3` is
+    connected to bridge `cni2`, the `same-bridge` ingress policy disallows
+    communications between `ns1` and `ns3`, while allowing communications
+    between `ns1` and `ns2`.
 
-```bash
-iptables -N CNI-ISOLATION-STAGE-1
-iptables -N CNI-ISOLATION-STAGE-2
-iptables -I FORWARD -j CNI-ISOLATION-STAGE-1
-iptables -A CNI-ISOLATION-STAGE-1 -i cni1 ! -o cni1 -j CNI-ISOLATION-STAGE-2
-iptables -A CNI-ISOLATION-STAGE-1 -i cni2 ! -o cni2 -j CNI-ISOLATION-STAGE-2
-iptables -A CNI-ISOLATION-STAGE-1 -j RETURN
-iptables -A CNI-ISOLATION-STAGE-2 -o cni1 -j DROP
-iptables -A CNI-ISOLATION-STAGE-2 -o cni2 -j DROP
-iptables -A CNI-ISOLATION-STAGE-2 -j RETURN
-```
+    ```bash
+    iptables -N CNI-ISOLATION-STAGE-1
+    iptables -N CNI-ISOLATION-STAGE-2
+    iptables -I FORWARD -j CNI-ISOLATION-STAGE-1
+    iptables -A CNI-ISOLATION-STAGE-1 -i cni1 ! -o cni1 -j CNI-ISOLATION-STAGE-2
+    iptables -A CNI-ISOLATION-STAGE-1 -i cni2 ! -o cni2 -j CNI-ISOLATION-STAGE-2
+    iptables -A CNI-ISOLATION-STAGE-1 -j RETURN
+    iptables -A CNI-ISOLATION-STAGE-2 -o cni1 -j DROP
+    iptables -A CNI-ISOLATION-STAGE-2 -o cni2 -j DROP
+    iptables -A CNI-ISOLATION-STAGE-2 -j RETURN
+    ```
 
-The number of commands is O(N) where N is the number of the bridges (not the number of the containers).
+    The number of commands is O(N) where N is the number of the bridges (not the number of the containers).
 
-Run `sudo iptables-save -t filter` to confirm the added rules.
+    Run `sudo iptables-save -t filter` to confirm the added rules.
 
-The `same-bridge` ingress policy is expected to be used in conjunction
+- `isolated` behaves similar to ingress policy `same-bridge` with the exception
+that connections from the same bridge are also blocked.  This is meant to be
+functionally equivalent to Docker network option "enable_icc" when set to false.
+
+    e.g., when `ns1` and `ns2` are two containers connected to the same bridge `cni1`,
+    the `isolated` ingress policy disallows communications between `ns1` and `ns2`.
+
+    ```bash
+    iptables -N CNI-ISOLATION-STAGE-1
+    iptables -N CNI-ISOLATION-STAGE-2
+    iptables -I FORWARD -j CNI-ISOLATION-STAGE-1
+    iptables -A CNI-ISOLATION-STAGE-1 -i cni1 ! -o cni1 -j CNI-ISOLATION-STAGE-2
+    iptables -A CNI-ISOLATION-STAGE-1 -i cni1 -o cni1 -j DROP
+    iptables -A CNI-ISOLATION-STAGE-1 -j RETURN
+    iptables -A CNI-ISOLATION-STAGE-2 -o cni1 -j DROP
+    iptables -A CNI-ISOLATION-STAGE-2 -j RETURN
+    ```
+
+ The `same-bridge` and `isolated` ingress policies are expected to be used in conjunction
 with `bridge` plugin. May not work as expected with other "main" plugins.
 
-It should be also noted that the `same-bridge` ingress policy executes
+It should be also noted that these ingress policies execute
 raw `iptables` commands directly, even when the `backend` is set to `firewalld`.
