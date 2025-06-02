@@ -169,6 +169,7 @@ table ip cni_hostport {
         ip protocol tcp th dport 8043  dnat ip addr . port to 172.16.30.2 . 443
     }
 }
+```
 
 New connections to the host will have to traverse every rule, so large numbers
 of port forwards may have a performance impact. This won't affect established
@@ -184,8 +185,9 @@ Unlike the iptables backend, the nftables backend figures out the
 packets that need to be masqueraded without using the packet mark or
 an external chain. Continuing the above example:
 
+```
 table ip cni_hostport {
-    comment "CNI portmap plugin"; }
+    comment "CNI portmap plugin"
 
     chain masquerading {
         type nat hook postrouting priority srcnat;
@@ -195,6 +197,7 @@ table ip cni_hostport {
         ip saddr 127.0.0.1 ip daddr 10.0.0.2  masquerade
     }
 }
+```
 
 ## Known issues
 
