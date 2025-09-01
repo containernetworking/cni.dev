@@ -21,7 +21,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -39,26 +39,10 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example L2-only configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
-    "ipam": {}
-}
-```
-
-## Example L2-only vlan configuration
-```json
-{
-    "cniVersion": "0.3.1",
-    "name": "mynet",
-    "type": "bridge",
-    "bridge": "mynet0",
-    "vlan": 100,
-    "vlanTrunk": [
-        { "id": 101 },
-        { "minID": 200, "maxID": 299 }
-    ],
     "ipam": {}
 }
 ```
@@ -66,7 +50,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example L2-only, disabled interface configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -77,7 +61,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example L2-only, port isolation enabled
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -100,16 +84,56 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `ipam` (dictionary, required): IPAM configuration to be used for this network. For L2-only network, create empty dictionary.
 * `promiscMode` (boolean, optional): set promiscuous mode on the bridge. Defaults to false.
 * `vlan` (int, optional): assign VLAN tag. Defaults to none.
-* `preserveDefaultVlan` (boolean, optional): indicates whether the default vlan must be preserved on the veth end connected to the bridge. Defaults to true.
+* `preserveDefaultVlan` (boolean, optional): indicates whether the default vlan must be preserved on the veth end connected to the bridge. Defaults to false.
 * `vlanTrunk` (list, optional): assign VLAN trunk tag. Defaults to none.
 * `enabledad` (boolean, optional): enables duplicate address detection for the container side veth. Defaults to false.
 * `macspoofchk` (boolean, optional): Enables mac spoof check, limiting the traffic originating from the container to the mac address of the interface. Defaults to false.
 * `disableContainerInterface` (boolean, optional): Set the container interface (veth peer inside the container netns) state down. When enabled, IPAM cannot be used.
 * `portIsolation` (boolean, optional): Set isolation on the host interface (veth peer in root netns). When enabled containers can communicate only with the host, or through the gateway. Defaults to false.
 
-*Note:* The VLAN parameter configures the VLAN tag on the host end of the veth and also enables the vlan_filtering feature on the bridge interface.
+## VLAN capabilities
+
+The `vlan` and `vlanTrunk` parameters can be used individually or together to configure VLAN tagging on the host end of the veth pair and enable `vlan_filtering` on the bridge interface.
+
+**Access Port (Single VLAN):**
+
+Use the `vlan` parameter by itself to tag all traffic on the interface with a specific VLAN ID. This is equivalent to an access port on a physical switch.
+
+**Trunk Port (Multiple VLANs):**
+
+To create a trunk port, use both `vlan` and `vlanTrunk`.
+
+*   `vlan`: Sets the native VLAN for the trunk.  If omitted, the native VLAN defaults to 1.
+*   `vlanTrunk`: Specifies the allowed VLANs on the trunk, either as a single ID or a range.
 
 *Note:* To configure uplink for L2 network you need to allow the vlan on the uplink interface by using the following command ``` bridge vlan add vid VLAN_ID dev DEV```.
+
+### Example L2 vlan configuration
+```json
+{
+    "cniVersion": "1.0.0",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "vlan": 100,
+    "ipam": {}
+}
+```
+
+### Example L2 vlan trunk configuration
+```json
+{
+    "cniVersion": "1.0.0",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "vlan": 100,
+    "vlanTrunk": [
+      { "id": 101 },
+      { "minID": 200, "maxID": 299 }],
+    "ipam": {}
+}
+```
 
 ## Interface configuration arguments reference
 
