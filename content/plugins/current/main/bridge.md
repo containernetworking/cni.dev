@@ -21,7 +21,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -39,7 +39,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example L2-only configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -50,7 +50,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example L2-only, disabled interface configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -61,7 +61,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example L2-only, port isolation enabled
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -111,7 +111,7 @@ To create a trunk port, use both `vlan` and `vlanTrunk`.
 ### Example L2 vlan configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -123,7 +123,7 @@ To create a trunk port, use both `vlan` and `vlanTrunk`.
 ### Example L2 vlan trunk configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
