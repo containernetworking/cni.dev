@@ -20,6 +20,7 @@ These are general-purpose CNI network plugins maintained by the containernetwork
 * [`ptp`](main/ptp): Creates a veth pair
 * [`host-device`](main/host-device): Moves an already-existing device into a container
 * [`vlan`](main/vlan): Creates a vlan interface off a master
+* [`tap`](main/tap): Creates a tap device inside the container namespace
 
 #### Windows: windows specific
 
@@ -38,6 +39,7 @@ These are general-purpose CNI network plugins maintained by the containernetwork
 * [`bandwidth`](meta/bandwidth): Allows bandwidth-limiting through use of traffic control tbf (ingress/egress)
 * [`sbr`](meta/sbr): A plugin that configures source based routing for an interface (from which it is chained)
 * [`firewall`](meta/firewall): A firewall plugin which uses iptables or firewalld to add rules to allow traffic to/from the container
+* [`vrf`](meta/vrf): Creates a [VRF](https://www.kernel.org/doc/Documentation/networking/vrf.txt) in the network namespace
 
 ## Contact
 
