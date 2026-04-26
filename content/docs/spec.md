@@ -42,7 +42,6 @@ weight: 100
       - [Delegated plugins (IPAM)](#delegated-plugins-ipam)
     - [VERSION Success](#version-success)
     - [Error](#error)
-    - [Version](#version-1)
   - [Appendix: Examples](#appendix-examples)
     - [Add example](#add-example)
     - [Check example](#check-example)
@@ -655,21 +654,6 @@ Error Code|Error Description
  `11`|Try again later. If the plugin detects some transient condition that should clear up, it can use this code to notify the runtime it should re-try the operation later.
 
 In addition, stderr can be used for unstructured output such as logs.
-
-### Version
-
-Plugins must output a JSON object with the following keys upon a `VERSION` operation:
-
-- `cniVersion`: The value of `cniVersion` specified on input
-- `supportedVersions`: A list of supported specification versions
-
-Example:
-```json
-{
-    "cniVersion": "1.1.0",
-    "supportedVersions": [ "0.1.0", "0.2.0", "0.3.0", "0.3.1", "0.4.0", "1.0.0", "1.1.0" ]
-}
-```
 
 
 ## Appendix: Examples
