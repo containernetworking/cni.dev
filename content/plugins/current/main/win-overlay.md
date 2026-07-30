@@ -23,7 +23,7 @@ With win-overlay plugin, all containers (on the same host) are plugged into an O
 		"subnet": "10.10.0.0/16"
 	},
     "loopbackDSR": true,
-    "capabilites": {
+    "capabilities": {
         "dns": true
     }
 }
@@ -38,7 +38,9 @@ With win-overlay plugin, all containers (on the same host) are plugged into an O
  * `Nameservers` (list, optional): list of strings to be used for dns nameservers.
  * `Search` (list, optional): list of stings to be used for dns search.
 * `endpointMacPrefix` (string, optional): set to the MAC prefix configured for Flannel.
-* `Policies` (list, optional): List of hns policies to be used.
+* `ApiVersion` (integer, optional): HNS API version. Defaults to `1` (legacy HNS APIs, historically used with dockershim). Set to `2` to use HCN APIs. With containerd (and typically cri-dockerd), **`ApiVersion: 2` is required**; without it, endpoint creation can fail with errors about a missing HNS endpoint that the plugin is supposed to create.
+* `Policies` (list, optional): List of hns policies to be used (only used when `ApiVersion` is less than `2`).
+* `HcnPolicyArgs` (list, optional): List of hcn policies to be used (only used when `ApiVersion` is `2`).
 * `ipam` (dictionary, required): IPAM configuration to be used for this network.
 * `loopbackDSR` (bool, optional): If true, will add a policy to allow the interface to support loopback direct server return.
 * `capabilities` (dictionary, optional): runtime capabilities to be parsed and injected by runtime.
