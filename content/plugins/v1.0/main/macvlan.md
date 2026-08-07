@@ -39,3 +39,6 @@ Since each macvlan interface has its own MAC address, it makes it easy to use wi
 
 * If you are testing on a laptop, please remember that most wireless cards do not support being enslaved by macvlan.
 * A single master interface can not be enslaved by both `macvlan` and `ipvlan`.
+* Gateway-related keys such as `isDefaultGateway`, `forceAddress`, and `ipMasq` are **not** macvlan options.
+  They belong to the [bridge](../bridge/) plugin. Putting them on a macvlan config is ignored (or misleading);
+  use bridge when you need those behaviors, or configure host routing separately for macvlan.
