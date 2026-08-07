@@ -78,10 +78,33 @@ The following [CNI_ARGS](https://github.com/containernetworking/cni/blob/master/
 
 Note: You may add `IgnoreUnknown=true` to allow loose CNI argument verification (see CNI's issue[#560](https://github.com/containernetworking/cni/issues/560)).
 
-The plugin also support following [capability argument](https://github.com/containernetworking/cni/blob/master/CONVENTIONS.md).
+The plugin also supports the following [capability](https://github.com/containernetworking/cni/blob/master/CONVENTIONS.md)
+(passed by the runtime via `runtimeConfig` when the capability is enabled):
 
-* `mac`: Pass MAC addresses for CNI interface
+* `mac`: MAC address for the container interface
 
-The following [args conventions](https://github.com/containernetworking/cni/blob/master/CONVENTIONS.md#args-in-network-config) are supported:
+Example (CNI 1.0.0 style — capability is declared and supplied under `runtimeConfig`,
+not as a top-level network field):
 
-* `mac` (string, optional): MAC address (i.e. hardware address) of interface
+```json
+{
+    "cniVersion": "1.0.0",
+    "name": "mynet",
+    "type": "bridge",
+    "bridge": "mynet0",
+    "capabilities": {
+        "mac": true
+    },
+    "runtimeConfig": {
+        "mac": "c2:11:22:33:44:55"
+    },
+    "ipam": {
+        "type": "host-local",
+        "subnet": "10.10.0.0/16"
+    }
+}
+```
+
+The following [args conventions](https://github.com/containernetworking/cni/blob/master/CONVENTIONS.md#args-in-network-config) are also supported:
+
+* `mac` (string, optional): MAC address (hardware address) of the interface
