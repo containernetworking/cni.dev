@@ -18,7 +18,7 @@ The following network configuration file
 
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "bridge-firewalld",
     "plugins": [
         {
@@ -61,7 +61,7 @@ look like:
 
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "bridge-firewalld",
     "plugins": [
         {
@@ -100,7 +100,7 @@ look like:
 
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.0.0",
     "name": "bridge-firewalld",
     "plugins": [
         {
