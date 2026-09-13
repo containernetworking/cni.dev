@@ -40,6 +40,6 @@ The host-local IPAM plugin can be used to allocate an IP address to the containe
 * `master` (string, required): name of the host interface to enslave. Defaults to default route interface.
 * `vlanId` (integer, required): id of the vlan
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to value chosen by the kernel.
-* `ipam` (dictionary, required): IPAM configuration to be used for this network.
+* `ipam` (dictionary, required): IPAM configuration to be used for this network. For interface only without ip address, create empty dictionary.
 * `dns` (dictionary, optional): DNS information to return as described in the [Result](https://github.com/containernetworking/cni/blob/master/SPEC.md#result).
 * `linkInContainer` (boolean, optional) specifies if the master interface is in the container network namespace or the main network namespace
