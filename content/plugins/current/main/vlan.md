@@ -40,6 +40,26 @@ The host-local IPAM plugin can be used to allocate an IP address to the containe
 * `master` (string, required): name of the host interface to enslave. Defaults to default route interface.
 * `vlanId` (integer, required): id of the vlan
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to value chosen by the kernel.
-* `ipam` (dictionary, required): IPAM configuration to be used for this network. For interface only without ip address, create empty dictionary.
+* `ipam` (dictionary, optional): IPAM configuration to be used for this network. Set it to an empty dictionary or omit it for L2-only mode.
 * `dns` (dictionary, optional): DNS information to return as described in the [Result](https://github.com/containernetworking/cni/blob/master/SPEC.md#result).
 * `linkInContainer` (boolean, optional) specifies if the master interface is in the container network namespace or the main network namespace
+
+## L2-only mode
+
+L2-only mode requires a plugin build containing the [optional-IPAM change](https://github.com/containernetworking/plugins/pull/1302).
+Earlier builds require an IPAM configuration. Use CNI specification version 0.3.0 or later, since older result formats cannot represent an interface without IP addresses.
+
+For example, this configuration creates and brings up a VLAN interface without invoking an IPAM plugin:
+
+```json
+{
+    "name": "mynet",
+    "cniVersion": "1.0.0",
+    "type": "vlan",
+    "master": "eth0",
+    "vlanId": 5,
+    "ipam": {}
+}
+```
+
+Address configuration is left to a later plugin or the workload. The kernel may still configure IPv6 addresses, such as link-local addresses or addresses obtained through SLAAC, according to the namespace's IPv6 settings.
