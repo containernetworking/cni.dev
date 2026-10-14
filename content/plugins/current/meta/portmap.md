@@ -31,7 +31,7 @@ look like:
 
 ```json
 {
-        "cniVersion": "0.3.1",
+        "cniVersion": "1.0.0",
         "name": "mynet",
         "plugins": [
                 {

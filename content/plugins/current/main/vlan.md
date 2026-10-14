@@ -17,7 +17,7 @@ The host-local IPAM plugin can be used to allocate an IP address to the containe
 ```json
 {
 	"name": "mynet",
-	"cniVersion": "0.3.1",
+	"cniVersion": "1.0.0",
 	"type": "vlan",
 	"master": "eth0",
 	"mtu": 1500,

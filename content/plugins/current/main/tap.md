@@ -18,7 +18,7 @@ the plugin will use the 'ip' tool to create the tap device when owner/group is n
 ```json
 {
 	"name": "mynet",
-	"cniVersion": "0.3.1",
+	"cniVersion": "1.0.0",
 	"type": "tap",
 	"mac": "00:11:22:33:44:55",
 	"mtu": 1500,

@@ -131,7 +131,7 @@ is the following.
 ```json
 {
   "name": "flannel-sbr",
-  "cniVersion": "0.3.0",
+  "cniVersion": "1.0.0",
   "plugins":
     [
         { "type": "flannel" },

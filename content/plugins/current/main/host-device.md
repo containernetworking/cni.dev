@@ -38,7 +38,7 @@ A sample configuration with `device` property looks like:
 
 ```json
 {
-	"cniVersion": "0.3.1",
+	"cniVersion": "1.0.0",
 	"type": "host-device",
 	"device": "enp0s1"
 }
@@ -48,7 +48,7 @@ A sample configuration with `pciBusID` property looks like:
 
 ```json
 {
-	"cniVersion": "0.3.1",
+	"cniVersion": "1.0.0",
 	"type": "host-device",
 	"pciBusID": "0000:3d:00.1"
 }
@@ -59,7 +59,7 @@ A sample configuration utilizing `deviceID` runtime configuration looks like:
 1. From operator perspective:
      ```json
     {
-    	"cniVersion": "0.3.1",
+    	"cniVersion": "1.0.0",
     	"type": "host-device",
     	"capabilities": {
     		"deviceID":  true
@@ -69,7 +69,7 @@ A sample configuration utilizing `deviceID` runtime configuration looks like:
 2. From plugin perspective:
     ```json
     {
-    	"cniVersion": "0.3.1",
+    	"cniVersion": "1.0.0",
     	"type": "host-device",
     	"runtimeConfig": {
     		"deviceID":  "0000:3d:00.1"
