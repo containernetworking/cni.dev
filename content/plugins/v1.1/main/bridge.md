@@ -21,7 +21,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.1.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
@@ -39,7 +39,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 ## Example L2-only configuration
 ```json
 {
-    "cniVersion": "0.3.1",
+    "cniVersion": "1.1.0",
     "name": "mynet",
     "type": "bridge",
     "bridge": "mynet0",
