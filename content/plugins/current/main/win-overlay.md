@@ -31,6 +31,7 @@ With win-overlay plugin, all containers (on the same host) are plugged into an O
 
 ## Network configuration reference
 
+* `apiVersion` (int, optional): the HNS API version to use, 1 or 2. Defaults to 1 (HNS), used with dockershim. Set to 2 to use HCN, used with containerd.
 * `name` (string, required): the name of the network.
 * `type` (string, required): "win-overlay".
 * `ipMasq` (bool, optional): the inverse of `$FLANNEL_IPMASQ`, setup NAT for the hnsNetwork subnet.
