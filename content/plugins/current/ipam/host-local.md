@@ -112,7 +112,7 @@ $ echo '{ "cniVersion": "1.0.0", "name": "examplenet", "ipam": { "type": "host-l
 * `ranges`, (array, required, nonempty) an array of arrays of range objects:
 	* `subnet` (string, required): CIDR block to allocate out of.
 	* `rangeStart` (string, optional): IP inside of "subnet" from which to start allocating addresses. Defaults to ".2" IP inside of the "subnet" block.
-	* `rangeEnd` (string, optional): IP inside of "subnet" with which to end allocating addresses. Defaults to ".254" IP inside of the "subnet" block for ipv4, ".255" for IPv6
+	* `rangeEnd` (string, optional): IP inside of "subnet" with which to end allocating addresses. Defaults to the last usable address in the subnet for IPv4 (the broadcast address is excluded, e.g. `.254` in a `/24`) and the last address in the subnet for IPv6 (not a literal `.255` unless the prefix makes the final byte `0xff`)
 	* `gateway` (string, optional): IP inside of "subnet" to designate as the gateway. Defaults to ".1" IP inside of the "subnet" block.
 
 Older versions of the `host-local` plugin did not support the `ranges` array. Instead,
