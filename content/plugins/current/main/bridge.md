@@ -81,6 +81,7 @@ If the bridge is missing, the plugin will create one on first use and, if gatewa
 * `ipMasqBackend` (string, optional): IP masquerading implementation to use when `ipMasq` is true. Can be "iptables" or "nftables". Defaults to "iptables", unless only "nftables" is available.
 * `mtu` (integer, optional): explicitly set MTU to the specified value. Defaults to the value chosen by the kernel.
 * `hairpinMode` (boolean, optional): set hairpin mode for interfaces on the bridge. Defaults to false.
+* `groupFwdMask` (int, optional): Configures Linux bridge `group_fwd_mask` to enable forwarding of link-local multicast MAC addresses (e.g., IEEE 1588 PTP). Writes to `/sys/class/net/<bridge>/bridge/group_fwd_mask`. Range: 0–65535. Default: not set (kernel default behavior).
 * `ipam` (dictionary, required): IPAM configuration to be used for this network. For L2-only network, create empty dictionary.
 * `promiscMode` (boolean, optional): set promiscuous mode on the bridge. Defaults to false.
 * `vlan` (int, optional): assign VLAN tag. Defaults to none.

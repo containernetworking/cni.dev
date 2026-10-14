@@ -16,6 +16,7 @@ With win-overlay plugin, all containers (on the same host) are plugged into an O
 {
 	"name": "mynet",
 	"type": "win-overlay",
+	"apiVersion": 2,
 	"ipMasq": true,
 	"endpointMacPrefix": "0E-2A",
 	"ipam": {
@@ -27,7 +28,6 @@ With win-overlay plugin, all containers (on the same host) are plugged into an O
         "dns": true
     }
 }
-```
 
 ## Network configuration reference
 
