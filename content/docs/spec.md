@@ -60,6 +60,7 @@ Released versions of the spec are available as Git tags.
 
 | tag                                                                                  | spec permalink                                                                        | major changes                     |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | --------------------------------- |
+| [`spec-v1.1.0`](https://github.com/containernetworking/cni/releases/tag/spec-v1.1.0) | [spec at v1.1.0](https://github.com/containernetworking/cni/blob/spec-v1.1.0/SPEC.md) | STATUS and GC commands; multi-version configs via `cniVersions` |
 | [`spec-v1.0.0`](https://github.com/containernetworking/cni/releases/tag/spec-v1.0.0) | [spec at v1.0.0](https://github.com/containernetworking/cni/blob/spec-v1.0.0/SPEC.md) | Removed non-list configurations; removed `version` field of `interfaces` array |
 | [`spec-v0.4.0`](https://github.com/containernetworking/cni/releases/tag/spec-v0.4.0) | [spec at v0.4.0](https://github.com/containernetworking/cni/blob/spec-v0.4.0/SPEC.md) | Introduce the CHECK command and passing prevResult on DEL |
 | [`spec-v0.3.1`](https://github.com/containernetworking/cni/releases/tag/spec-v0.3.1) | [spec at v0.3.1](https://github.com/containernetworking/cni/blob/spec-v0.3.1/SPEC.md) | none (typo fix only)              |
